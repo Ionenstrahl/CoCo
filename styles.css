@@ -111,7 +111,7 @@ section h2 {
     font-size: 0.95rem;
 }
 
-/* Foods Visualization */
+/* Foods Visualization - Carousel */
 .foods-visualization {
     background: var(--color-white);
     padding: var(--spacing-lg);
@@ -119,58 +119,123 @@ section h2 {
     box-shadow: 0 2px 4px var(--color-shadow);
 }
 
-.foods-list {
+.carousel-container {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    max-width: 800px;
-    margin: 0 auto;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.carousel-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.foods-carousel {
+    display: flex;
+    gap: var(--spacing-md);
+    transition: transform 0.4s ease-in-out;
+}
+
+.carousel-btn {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px var(--color-shadow);
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: var(--color-primary);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.carousel-btn:disabled {
+    background: var(--color-text-light);
+    cursor: not-allowed;
+    opacity: 0.5;
+    transform: scale(1);
+}
+
+.carousel-btn span {
+    display: block;
+    margin-top: -4px;
+}
+
+.carousel-indicators {
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+.carousel-position {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    font-weight: 500;
 }
 
 .food-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     border-radius: var(--border-radius);
     background: var(--color-background);
     transition: all 0.3s;
     border: 2px solid transparent;
+    min-width: 280px;
+    flex-shrink: 0;
+    text-align: center;
 }
 
 .food-item:hover {
     background-color: rgba(92, 141, 58, 0.1);
     border-color: var(--color-secondary);
-    transform: translateX(4px);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px var(--color-shadow);
 }
 
 .food-rank {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-text-light);
-    min-width: 40px;
-    text-align: center;
     flex-shrink: 0;
 }
 
 .food-rank.top-3 {
     color: var(--color-secondary);
+    font-size: 1.8rem;
 }
 
 .food-image {
-    width: 48px;
-    height: 48px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 50%;
     background: #f0f0f0;
     flex-shrink: 0;
+    margin: var(--spacing-sm) 0;
 }
 
 .food-image.placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 .co2-indicator {
@@ -178,26 +243,25 @@ section h2 {
     flex-shrink: 0;
     transition: all 0.3s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: var(--spacing-sm) 0;
 }
 
 .food-item:hover .co2-indicator {
-    transform: scale(1.15);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .food-name {
-    flex: 1;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
 }
 
 .food-co2-value {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--color-text-light);
-    min-width: 100px;
-    text-align: right;
-    flex-shrink: 0;
+    font-weight: 500;
 }
 
 .info-icon {
@@ -450,10 +514,6 @@ tbody tr.lowest-co2 {
         height: 80px;
     }
 
-    .food-categories {
-        grid-template-columns: 1fr;
-    }
-
     .mode-buttons {
         flex-direction: column;
     }
@@ -462,8 +522,14 @@ tbody tr.lowest-co2 {
         width: 100%;
     }
 
-    .chart-container {
-        height: 300px;
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .food-item {
+        min-width: 220px;
     }
 
     table {
@@ -491,6 +557,27 @@ tbody tr.lowest-co2 {
 
     .header-text h1 {
         font-size: 1.5rem;
+    }
+
+    .carousel-container {
+        gap: var(--spacing-xs);
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+    }
+
+    .food-item {
+        min-width: 200px;
+        padding: var(--spacing-md);
+    }
+
+    .food-image {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5rem;
     }
 }
 

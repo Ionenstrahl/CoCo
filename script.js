@@ -1,7 +1,10 @@
-// ABOUTME: Main JavaScript for CoCo food comparison tool with visual dot-based representations
-// ABOUTME: Displays all foods sorted by CO2 footprint with proportional dot sizes
+// ABOUTME: Main JavaScript for CoCo food comparison tool with carousel visualization
+// ABOUTME: Displays all foods sorted by CO2 footprint in an interactive carousel
 
 let comparisonMode = 'weight';
+let carouselPosition = 0;
+let itemsPerView = 3;
+let totalItems = 0;
 
 const modeDescriptions = {
     weight: 'Comparing CO2 emissions per 100 grams of food',
@@ -20,8 +23,26 @@ const foodEmojis = {
 };
 
 function initializeApp() {
+    calculateItemsPerView();
     setupEventListeners();
     renderAllFoods();
+    window.addEventListener('resize', () => {
+        calculateItemsPerView();
+        updateCarouselPosition();
+    });
+}
+
+function calculateItemsPerView() {
+    const width = window.innerWidth;
+    if (width < 480) {
+        itemsPerView = 1;
+    } else if (width < 768) {
+        itemsPerView = 2;
+    } else if (width < 1024) {
+        itemsPerView = 3;
+    } else {
+        itemsPerView = 4;
+    }
 }
 
 function renderAllFoods() {
@@ -32,6 +53,9 @@ function renderAllFoods() {
 
     foodsWithCO2.sort((a, b) => a.co2Value - b.co2Value);
 
+    totalItems = foodsWithCO2.length;
+    carouselPosition = 0;
+
     const container = document.getElementById('foodsList');
     container.innerHTML = '';
 
@@ -40,6 +64,7 @@ function renderAllFoods() {
         container.appendChild(foodItem);
     });
 
+    updateCarouselPosition();
     renderTable(foodsWithCO2);
 }
 
@@ -112,6 +137,14 @@ function setupEventListeners() {
         btn.addEventListener('click', handleModeChange);
     });
 
+    document.getElementById('carouselPrev').addEventListener('click', () => navigateCarousel(-1));
+    document.getElementById('carouselNext').addEventListener('click', () => navigateCarousel(1));
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') navigateCarousel(-1);
+        if (e.key === 'ArrowRight') navigateCarousel(1);
+    });
+
     document.getElementById('viewSourcesLink').addEventListener('click', (e) => {
         e.preventDefault();
         showAllSourcesModal();
@@ -126,6 +159,36 @@ function setupEventListeners() {
             closeModals();
         }
     });
+}
+
+function navigateCarousel(direction) {
+    const maxPosition = totalItems - itemsPerView;
+    carouselPosition = Math.max(0, Math.min(carouselPosition + direction, maxPosition));
+    updateCarouselPosition();
+}
+
+function updateCarouselPosition() {
+    const container = document.getElementById('foodsList');
+    const items = container.children;
+
+    if (items.length === 0) return;
+
+    const itemWidth = items[0].offsetWidth;
+    const gap = 16;
+    const offset = -(carouselPosition * (itemWidth + gap));
+
+    container.style.transform = `translateX(${offset}px)`;
+
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const positionText = document.getElementById('carouselPosition');
+
+    prevBtn.disabled = carouselPosition === 0;
+    nextBtn.disabled = carouselPosition >= totalItems - itemsPerView;
+
+    const startItem = carouselPosition + 1;
+    const endItem = Math.min(carouselPosition + itemsPerView, totalItems);
+    positionText.textContent = `Showing ${startItem}-${endItem} of ${totalItems} foods`;
 }
 
 function handleModeChange(e) {

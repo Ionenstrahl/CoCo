@@ -35,11 +35,28 @@
                 <p class="mode-description" id="modeDescription">Comparing CO2 emissions per 100 grams of food</p>
             </section>
 
-            <!-- All Foods Visualization - Sorted by CO2 -->
+            <!-- All Foods Visualization - Carousel -->
             <section class="foods-visualization">
                 <h2>All Foods Ranked by CO2 Footprint</h2>
                 <p class="help-text">Foods are ordered from lowest to highest CO2 emissions. Dot size represents environmental impact.</p>
-                <div id="foodsList" class="foods-list"></div>
+
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous foods">
+                        <span>‹</span>
+                    </button>
+
+                    <div class="carousel-wrapper">
+                        <div id="foodsList" class="foods-carousel"></div>
+                    </div>
+
+                    <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next foods">
+                        <span>›</span>
+                    </button>
+                </div>
+
+                <div class="carousel-indicators">
+                    <span id="carouselPosition" class="carousel-position"></span>
+                </div>
             </section>
 
             <!-- Detailed Comparison Table -->
