@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare the CO2 footprint of different foods per weight, calories, and protein. Learn how your food choices impact the environment with Coco the Koala.">
+    <title>CoCo's CO2 Food Comparison | Environmental Impact Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Coco the Koala -->
+        <header class="header">
+            <div class="header-content">
+                <div class="koala-mascot">
+                    <img src="assets/coco-koala.png" alt="Coco the Koala" id="cocoImage" onerror="this.style.display='none'">
+                </div>
+                <div class="header-text">
+                    <h1>🐨 Coco's CO2 Food Comparison</h1>
+                    <p class="tagline">Hi! I'm Coco the Koala. Let's compare food CO2 footprints!</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Food Selection Section -->
+            <section class="food-selection">
+                <h2>Select Foods to Compare</h2>
+                <p class="help-text">Choose at least 2 foods to see their environmental impact</p>
+
+                <div class="food-categories">
+                    <div class="category-group">
+                        <h3 class="category-title">🥩 Animal Products</h3>
+                        <div id="animalFoods" class="food-list"></div>
+                    </div>
+
+                    <div class="category-group">
+                        <h3 class="category-title">🌱 Plant-Based Proteins</h3>
+                        <div id="plantProteinFoods" class="food-list"></div>
+                    </div>
+
+                    <div class="category-group">
+                        <h3 class="category-title">🌾 Grains</h3>
+                        <div id="grainFoods" class="food-list"></div>
+                    </div>
+
+                    <div class="category-group">
+                        <h3 class="category-title">🥕 Vegetables</h3>
+                        <div id="vegetableFoods" class="food-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Mode Selection -->
+            <section class="comparison-mode">
+                <h2>Comparison Mode</h2>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="weight">Per 100g</button>
+                    <button class="mode-btn" data-mode="calories">Per 100 kcal</button>
+                    <button class="mode-btn" data-mode="protein">Per 10g protein</button>
+                </div>
+                <p class="mode-description" id="modeDescription">Comparing CO2 emissions per 100 grams of food</p>
+            </section>
+
+            <!-- Chart Visualization -->
+            <section class="chart-section">
+                <h2>CO2 Emissions Comparison</h2>
+                <div class="chart-container">
+                    <canvas id="co2Chart"></canvas>
+                </div>
+                <div id="emptyState" class="empty-state">
+                    <p>👆 Select at least 2 foods above to see the comparison</p>
+                </div>
+            </section>
+
+            <!-- Detailed Comparison Table -->
+            <section class="table-section">
+                <h2>Detailed Comparison</h2>
+                <div class="table-container">
+                    <table id="comparisonTable">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>CO2 (kg)</th>
+                                <th>Calories</th>
+                                <th>Protein (g)</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data sources: <a href="#" id="viewSourcesLink">View all scientific sources</a></p>
+            <p class="attribution">Made with ❤️ by Claude | <a href="https://github.com/Ionenstrahl/CoCo" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <!-- Source Modal -->
+    <div id="sourceModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Scientific Source</h2>
+            <div id="sourceDetails"></div>
+        </div>
+    </div>
+
+    <!-- All Sources Modal -->
+    <div id="allSourcesModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>All Data Sources</h2>
+            <div id="allSourcesDetails"></div>
+        </div>
+    </div>
+
+    <!-- Load data and main script -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
