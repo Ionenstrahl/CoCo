@@ -8,6 +8,7 @@ let totalItems = 0;
 
 let touchStartX = 0;
 let touchEndX = 0;
+let touchStartY = 0;
 let touchStartTime = 0;
 
 const modeDescriptions = {
@@ -150,9 +151,9 @@ function setupEventListeners() {
     });
 
     const carouselWrapper = document.querySelector('.carousel-wrapper');
-    carouselWrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
-    carouselWrapper.addEventListener('touchmove', handleTouchMove, { passive: true });
-    carouselWrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
+    carouselWrapper.addEventListener('touchstart', handleTouchStart, { passive: false });
+    carouselWrapper.addEventListener('touchmove', handleTouchMove, { passive: false });
+    carouselWrapper.addEventListener('touchend', handleTouchEnd, { passive: false });
 
     document.getElementById('viewSourcesLink').addEventListener('click', (e) => {
         e.preventDefault();
@@ -172,15 +173,28 @@ function setupEventListeners() {
 
 function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
     touchStartTime = Date.now();
 }
 
 function handleTouchMove(e) {
+    if (!touchStartX) return;
+
     touchEndX = e.touches[0].clientX;
+    const touchEndY = e.touches[0].clientY;
+
+    const deltaX = Math.abs(touchEndX - touchStartX);
+    const deltaY = Math.abs(touchEndY - touchStartY);
+
+    if (deltaX > deltaY && deltaX > 10) {
+        e.preventDefault();
+    }
 }
 
-function handleTouchEnd() {
-    if (!touchStartX || !touchEndX) return;
+function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].clientX;
+
+    if (!touchStartX) return;
 
     const swipeDistance = touchStartX - touchEndX;
     const swipeTime = Date.now() - touchStartTime;
@@ -197,6 +211,7 @@ function handleTouchEnd() {
 
     touchStartX = 0;
     touchEndX = 0;
+    touchStartY = 0;
     touchStartTime = 0;
 }
 

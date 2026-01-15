@@ -131,9 +131,13 @@ section h2 {
     flex: 1;
     overflow: hidden;
     position: relative;
-    touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;
+    cursor: grab;
+}
+
+.carousel-wrapper:active {
+    cursor: grabbing;
 }
 
 .foods-carousel {
