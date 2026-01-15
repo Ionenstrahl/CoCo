@@ -70,17 +70,11 @@ function renderAllFoods() {
     });
 
     updateCarouselPosition();
-    renderTable(foodsWithCO2);
 }
 
 function createFoodItem(food, rank) {
     const foodItem = document.createElement('div');
     foodItem.className = 'food-item';
-
-    const rankSpan = document.createElement('span');
-    rankSpan.className = 'food-rank';
-    if (rank <= 3) rankSpan.classList.add('top-3');
-    rankSpan.textContent = `#${rank}`;
 
     const foodImage = document.createElement('div');
     foodImage.className = 'food-image placeholder';
@@ -96,14 +90,8 @@ function createFoodItem(food, rank) {
     const co2Value = document.createElement('div');
     co2Value.className = 'food-co2-value';
     co2Value.textContent = `${food.co2Value.toFixed(3)} kg CO2`;
+    co2Value.addEventListener('click', () => showSourceModal(food));
 
-    const infoButton = document.createElement('button');
-    infoButton.className = 'info-icon';
-    infoButton.innerHTML = 'ℹ️';
-    infoButton.title = 'View source';
-    infoButton.addEventListener('click', () => showSourceModal(food));
-
-    foodItem.appendChild(rankSpan);
     foodItem.appendChild(foodImage);
     foodItem.appendChild(co2Dot);
     foodItem.appendChild(foodName);
@@ -284,63 +272,6 @@ function calculateCO2(food, mode) {
         default:
             return co2PerKg / 10;
     }
-}
-
-function renderTable(foodsWithCO2) {
-    const tbody = document.getElementById('tableBody');
-    tbody.innerHTML = '';
-
-    const lowestCO2 = foodsWithCO2.length > 0 ? foodsWithCO2[0].co2Value : null;
-
-    foodsWithCO2.forEach((food, index) => {
-        const row = document.createElement('tr');
-        if (food.co2Value === lowestCO2) {
-            row.classList.add('lowest-co2');
-        }
-
-        const rankCell = document.createElement('td');
-        rankCell.textContent = `#${index + 1}`;
-        if (index < 3) {
-            rankCell.style.fontWeight = '700';
-            rankCell.style.color = 'var(--color-secondary)';
-        }
-
-        const nameCell = document.createElement('td');
-        const emoji = foodEmojis[food.id] || '🍽️';
-        nameCell.textContent = `${emoji} ${food.name}`;
-        if (food.co2Value === lowestCO2) {
-            nameCell.textContent += ' 🌟';
-        }
-
-        const co2Cell = document.createElement('td');
-        co2Cell.textContent = food.co2Value.toFixed(3);
-
-        const caloriesCell = document.createElement('td');
-        caloriesCell.textContent = food.caloriesPer100g;
-
-        const proteinCell = document.createElement('td');
-        proteinCell.textContent = food.proteinPer100g.toFixed(1);
-
-        const sourceCell = document.createElement('td');
-        const sourceLink = document.createElement('a');
-        sourceLink.href = '#';
-        sourceLink.className = 'source-link';
-        sourceLink.textContent = 'View';
-        sourceLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showSourceModal(food);
-        });
-        sourceCell.appendChild(sourceLink);
-
-        row.appendChild(rankCell);
-        row.appendChild(nameCell);
-        row.appendChild(co2Cell);
-        row.appendChild(caloriesCell);
-        row.appendChild(proteinCell);
-        row.appendChild(sourceCell);
-
-        tbody.appendChild(row);
-    });
 }
 
 function getColorForCO2(value) {

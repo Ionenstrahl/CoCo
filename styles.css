@@ -272,21 +272,6 @@ section h2 {
     font-weight: 500;
 }
 
-.info-icon {
-    background: none;
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-    padding: 4px;
-    color: var(--color-secondary);
-    transition: transform 0.2s;
-    flex-shrink: 0;
-}
-
-.info-icon:hover {
-    transform: scale(1.2);
-}
-
 /* Comparison Mode */
 .comparison-mode {
     text-align: center;
@@ -353,49 +338,6 @@ section h2 {
     display: none;
 }
 
-/* Table Section */
-.table-container {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-thead {
-    background: var(--color-primary);
-    color: var(--color-white);
-}
-
-th, td {
-    padding: var(--spacing-sm);
-    text-align: left;
-    border-bottom: 1px solid var(--color-border);
-}
-
-th {
-    font-weight: 600;
-}
-
-tbody tr:hover {
-    background-color: var(--color-background);
-}
-
-tbody tr.lowest-co2 {
-    background-color: rgba(76, 175, 80, 0.1);
-}
-
-.source-link {
-    color: var(--color-secondary);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--color-secondary);
-    cursor: pointer;
-}
-
-.source-link:hover {
-    border-bottom-style: solid;
-}
 
 /* Footer */
 .footer {
@@ -604,11 +546,6 @@ tbody tr.lowest-co2 {
 
     .food-co2-value {
         font-size: 0.65rem;
-    }
-
-    .info-icon {
-        font-size: 0.9rem;
-        padding: 2px;
     }
 }
 
