@@ -151,17 +151,45 @@ section h2 {
     background-color: rgba(92, 141, 58, 0.1);
 }
 
+.food-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #e0e0e0;
+    flex-shrink: 0;
+}
+
+.food-image.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.co2-indicator {
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.food-item:hover .co2-indicator {
+    transform: scale(1.1);
+}
+
 .food-item input[type="checkbox"] {
     width: 18px;
     height: 18px;
     cursor: pointer;
     accent-color: var(--color-secondary);
+    flex-shrink: 0;
 }
 
 .food-item label {
     flex: 1;
     cursor: pointer;
     user-select: none;
+    font-weight: 500;
 }
 
 .info-icon {
@@ -172,6 +200,7 @@ section h2 {
     padding: 4px;
     color: var(--color-secondary);
     transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .info-icon:hover {

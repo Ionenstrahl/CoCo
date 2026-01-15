@@ -11,6 +11,16 @@ const modeDescriptions = {
     protein: 'Comparing CO2 emissions per 10 grams of protein'
 };
 
+const foodEmojis = {
+    beef: '🥩', lamb: '🐑', pork: '🐷', chicken: '🍗',
+    salmon_farmed: '🐟', tuna: '🐟', whitefish: '🐟',
+    cheese: '🧀', milk: '🥛', eggs: '🥚', yogurt: '🥛',
+    tofu: '🧈', lentils: '🫘', chickpeas: '🫘', black_beans: '🫘',
+    peanuts: '🥜', almonds: '🌰', avocado: '🥑',
+    rice: '🍚', wheat_bread: '🍞', oats: '🌾',
+    potatoes: '🥔', tomatoes: '🍅', broccoli: '🥦', carrots: '🥕'
+};
+
 function initializeApp() {
     renderFoodLists();
     setupEventListeners();
@@ -32,6 +42,13 @@ function renderFoodLists() {
         const foodItem = document.createElement('div');
         foodItem.className = 'food-item';
 
+        const foodImage = document.createElement('div');
+        foodImage.className = 'food-image placeholder';
+        foodImage.textContent = foodEmojis[food.id] || '🍽️';
+        foodImage.title = food.name;
+
+        const co2Dot = createCO2Indicator(food.co2PerKg);
+
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = `food-${food.id}`;
@@ -48,12 +65,37 @@ function renderFoodLists() {
         infoButton.title = 'View source';
         infoButton.addEventListener('click', () => showSourceModal(food));
 
+        foodItem.appendChild(foodImage);
+        foodItem.appendChild(co2Dot);
         foodItem.appendChild(checkbox);
         foodItem.appendChild(label);
         foodItem.appendChild(infoButton);
 
         container.appendChild(foodItem);
     });
+}
+
+function createCO2Indicator(co2PerKg) {
+    const dot = document.createElement('div');
+    dot.className = 'co2-indicator';
+
+    const minSize = 8;
+    const maxSize = 24;
+    const minCO2 = 0;
+    const maxCO2 = 30;
+
+    const normalizedCO2 = Math.min(co2PerKg, maxCO2) / maxCO2;
+    const size = minSize + (normalizedCO2 * (maxSize - minSize));
+
+    const co2Per100g = co2PerKg / 10;
+    const color = getColorForCO2(co2Per100g);
+
+    dot.style.width = `${size}px`;
+    dot.style.height = `${size}px`;
+    dot.style.backgroundColor = color;
+    dot.title = `${co2PerKg.toFixed(1)} kg CO2/kg`;
+
+    return dot;
 }
 
 function setupEventListeners() {
