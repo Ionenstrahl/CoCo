@@ -1,9 +1,7 @@
-// ABOUTME: Main JavaScript for CoCo food comparison tool with Chart.js visualizations
-// ABOUTME: Handles food selection, CO2 calculations, chart rendering, and modal interactions
+// ABOUTME: Main JavaScript for CoCo food comparison tool with visual dot-based representations
+// ABOUTME: Displays all foods sorted by CO2 footprint with proportional dot sizes
 
-let selectedFoods = [];
 let comparisonMode = 'weight';
-let chart = null;
 
 const modeDescriptions = {
     weight: 'Comparing CO2 emissions per 100 grams of food',
@@ -22,78 +20,89 @@ const foodEmojis = {
 };
 
 function initializeApp() {
-    renderFoodLists();
     setupEventListeners();
-    updateView();
+    renderAllFoods();
 }
 
-function renderFoodLists() {
-    const categories = {
-        animal: document.getElementById('animalFoods'),
-        plant_protein: document.getElementById('plantProteinFoods'),
-        grain: document.getElementById('grainFoods'),
-        vegetable: document.getElementById('vegetableFoods')
-    };
+function renderAllFoods() {
+    const foodsWithCO2 = foods.map(food => ({
+        ...food,
+        co2Value: calculateCO2(food, comparisonMode)
+    })).filter(food => food.co2Value !== null);
 
-    foods.forEach(food => {
-        const container = categories[food.category];
-        if (!container) return;
+    foodsWithCO2.sort((a, b) => a.co2Value - b.co2Value);
 
-        const foodItem = document.createElement('div');
-        foodItem.className = 'food-item';
+    const container = document.getElementById('foodsList');
+    container.innerHTML = '';
 
-        const foodImage = document.createElement('div');
-        foodImage.className = 'food-image placeholder';
-        foodImage.textContent = foodEmojis[food.id] || '🍽️';
-        foodImage.title = food.name;
-
-        const co2Dot = createCO2Indicator(food.co2PerKg);
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = `food-${food.id}`;
-        checkbox.value = food.id;
-        checkbox.addEventListener('change', handleFoodSelection);
-
-        const label = document.createElement('label');
-        label.htmlFor = `food-${food.id}`;
-        label.textContent = food.name;
-
-        const infoButton = document.createElement('button');
-        infoButton.className = 'info-icon';
-        infoButton.innerHTML = 'ℹ️';
-        infoButton.title = 'View source';
-        infoButton.addEventListener('click', () => showSourceModal(food));
-
-        foodItem.appendChild(foodImage);
-        foodItem.appendChild(co2Dot);
-        foodItem.appendChild(checkbox);
-        foodItem.appendChild(label);
-        foodItem.appendChild(infoButton);
-
+    foodsWithCO2.forEach((food, index) => {
+        const foodItem = createFoodItem(food, index + 1);
         container.appendChild(foodItem);
     });
+
+    renderTable(foodsWithCO2);
 }
 
-function createCO2Indicator(co2PerKg) {
+function createFoodItem(food, rank) {
+    const foodItem = document.createElement('div');
+    foodItem.className = 'food-item';
+
+    const rankSpan = document.createElement('span');
+    rankSpan.className = 'food-rank';
+    if (rank <= 3) rankSpan.classList.add('top-3');
+    rankSpan.textContent = `#${rank}`;
+
+    const foodImage = document.createElement('div');
+    foodImage.className = 'food-image placeholder';
+    foodImage.textContent = foodEmojis[food.id] || '🍽️';
+    foodImage.title = food.name;
+
+    const co2Dot = createCO2IndicatorByArea(food.co2Value);
+
+    const foodName = document.createElement('div');
+    foodName.className = 'food-name';
+    foodName.textContent = food.name;
+
+    const co2Value = document.createElement('div');
+    co2Value.className = 'food-co2-value';
+    co2Value.textContent = `${food.co2Value.toFixed(3)} kg CO2`;
+
+    const infoButton = document.createElement('button');
+    infoButton.className = 'info-icon';
+    infoButton.innerHTML = 'ℹ️';
+    infoButton.title = 'View source';
+    infoButton.addEventListener('click', () => showSourceModal(food));
+
+    foodItem.appendChild(rankSpan);
+    foodItem.appendChild(foodImage);
+    foodItem.appendChild(co2Dot);
+    foodItem.appendChild(foodName);
+    foodItem.appendChild(co2Value);
+    foodItem.appendChild(infoButton);
+
+    return foodItem;
+}
+
+function createCO2IndicatorByArea(co2Value) {
     const dot = document.createElement('div');
     dot.className = 'co2-indicator';
 
-    const minSize = 8;
-    const maxSize = 24;
-    const minCO2 = 0;
-    const maxCO2 = 30;
+    const minArea = Math.PI * 6 * 6;
+    const maxArea = Math.PI * 30 * 30;
 
-    const normalizedCO2 = Math.min(co2PerKg, maxCO2) / maxCO2;
-    const size = minSize + (normalizedCO2 * (maxSize - minSize));
+    const maxCO2 = 3.0;
+    const normalizedCO2 = Math.min(co2Value, maxCO2) / maxCO2;
+    const area = minArea + (normalizedCO2 * (maxArea - minArea));
 
-    const co2Per100g = co2PerKg / 10;
-    const color = getColorForCO2(co2Per100g);
+    const radius = Math.sqrt(area / Math.PI);
+    const size = radius * 2;
+
+    const color = getColorForCO2(co2Value);
 
     dot.style.width = `${size}px`;
     dot.style.height = `${size}px`;
     dot.style.backgroundColor = color;
-    dot.title = `${co2PerKg.toFixed(1)} kg CO2/kg`;
+    dot.title = `${co2Value.toFixed(3)} kg CO2`;
 
     return dot;
 }
@@ -119,19 +128,6 @@ function setupEventListeners() {
     });
 }
 
-function handleFoodSelection(e) {
-    const foodId = e.target.value;
-
-    if (e.target.checked) {
-        const food = foods.find(f => f.id === foodId);
-        if (food) selectedFoods.push(food);
-    } else {
-        selectedFoods = selectedFoods.filter(f => f.id !== foodId);
-    }
-
-    updateView();
-}
-
 function handleModeChange(e) {
     document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -142,20 +138,14 @@ function handleModeChange(e) {
 
     document.getElementById('modeDescription').textContent = modeDescriptions[comparisonMode];
 
-    updateView();
-}
+    const headerLabels = {
+        weight: 'CO2 per 100g',
+        calories: 'CO2 per 100 kcal',
+        protein: 'CO2 per 10g protein'
+    };
+    document.getElementById('co2Header').textContent = headerLabels[comparisonMode];
 
-function updateView() {
-    if (selectedFoods.length >= 2) {
-        document.getElementById('emptyState').classList.add('hidden');
-        document.querySelector('.chart-container').classList.add('active');
-        renderChart();
-        renderTable();
-    } else {
-        document.getElementById('emptyState').classList.remove('hidden');
-        document.querySelector('.chart-container').classList.remove('active');
-        clearTable();
-    }
+    renderAllFoods();
 }
 
 function calculateCO2(food, mode) {
@@ -179,104 +169,40 @@ function calculateCO2(food, mode) {
     }
 }
 
-function renderChart() {
-    const ctx = document.getElementById('co2Chart');
-
-    const chartData = selectedFoods
-        .map(food => ({
-            food,
-            co2: calculateCO2(food, comparisonMode)
-        }))
-        .filter(item => item.co2 !== null)
-        .sort((a, b) => b.co2 - a.co2);
-
-    const labels = chartData.map(item => item.food.name);
-    const data = chartData.map(item => item.co2);
-    const colors = data.map(value => getColorForCO2(value));
-
-    if (chart) {
-        chart.destroy();
-    }
-
-    chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: getModeLabel(),
-                data: data,
-                backgroundColor: colors,
-                borderColor: colors.map(c => darkenColor(c)),
-                borderWidth: 2
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.parsed.x.toFixed(3)} kg CO2`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'CO2 Emissions (kg)',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        }
-                    }
-                }
-            }
-        }
-    });
-}
-
-function renderTable() {
+function renderTable(foodsWithCO2) {
     const tbody = document.getElementById('tableBody');
     tbody.innerHTML = '';
 
-    const tableData = selectedFoods
-        .map(food => ({
-            food,
-            co2: calculateCO2(food, comparisonMode)
-        }))
-        .filter(item => item.co2 !== null)
-        .sort((a, b) => a.co2 - b.co2);
+    const lowestCO2 = foodsWithCO2.length > 0 ? foodsWithCO2[0].co2Value : null;
 
-    const lowestCO2 = tableData.length > 0 ? tableData[0].co2 : null;
-
-    tableData.forEach(item => {
+    foodsWithCO2.forEach((food, index) => {
         const row = document.createElement('tr');
-        if (item.co2 === lowestCO2) {
+        if (food.co2Value === lowestCO2) {
             row.classList.add('lowest-co2');
         }
 
+        const rankCell = document.createElement('td');
+        rankCell.textContent = `#${index + 1}`;
+        if (index < 3) {
+            rankCell.style.fontWeight = '700';
+            rankCell.style.color = 'var(--color-secondary)';
+        }
+
         const nameCell = document.createElement('td');
-        nameCell.textContent = item.food.name;
-        if (item.co2 === lowestCO2) {
+        const emoji = foodEmojis[food.id] || '🍽️';
+        nameCell.textContent = `${emoji} ${food.name}`;
+        if (food.co2Value === lowestCO2) {
             nameCell.textContent += ' 🌟';
         }
 
         const co2Cell = document.createElement('td');
-        co2Cell.textContent = item.co2.toFixed(3);
+        co2Cell.textContent = food.co2Value.toFixed(3);
 
         const caloriesCell = document.createElement('td');
-        caloriesCell.textContent = item.food.caloriesPer100g;
+        caloriesCell.textContent = food.caloriesPer100g;
 
         const proteinCell = document.createElement('td');
-        proteinCell.textContent = item.food.proteinPer100g.toFixed(1);
+        proteinCell.textContent = food.proteinPer100g.toFixed(1);
 
         const sourceCell = document.createElement('td');
         const sourceLink = document.createElement('a');
@@ -285,10 +211,11 @@ function renderTable() {
         sourceLink.textContent = 'View';
         sourceLink.addEventListener('click', (e) => {
             e.preventDefault();
-            showSourceModal(item.food);
+            showSourceModal(food);
         });
         sourceCell.appendChild(sourceLink);
 
+        row.appendChild(rankCell);
         row.appendChild(nameCell);
         row.appendChild(co2Cell);
         row.appendChild(caloriesCell);
@@ -299,23 +226,6 @@ function renderTable() {
     });
 }
 
-function clearTable() {
-    document.getElementById('tableBody').innerHTML = '';
-}
-
-function getModeLabel() {
-    switch (comparisonMode) {
-        case 'weight':
-            return 'CO2 per 100g';
-        case 'calories':
-            return 'CO2 per 100 kcal';
-        case 'protein':
-            return 'CO2 per 10g protein';
-        default:
-            return 'CO2';
-    }
-}
-
 function getColorForCO2(value) {
     if (value < 0.5) return '#4caf50';
     if (value < 1.5) return '#8bc34a';
@@ -323,14 +233,6 @@ function getColorForCO2(value) {
     if (value < 5.0) return '#ffeb3b';
     if (value < 10.0) return '#ff9800';
     return '#f44336';
-}
-
-function darkenColor(hex) {
-    const rgb = parseInt(hex.slice(1), 16);
-    const r = Math.max(0, (rgb >> 16) - 30);
-    const g = Math.max(0, ((rgb >> 8) & 0x00ff) - 30);
-    const b = Math.max(0, (rgb & 0x0000ff) - 30);
-    return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
 }
 
 function showSourceModal(food) {

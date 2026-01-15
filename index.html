@@ -6,7 +6,6 @@
     <meta name="description" content="Compare the CO2 footprint of different foods per weight, calories, and protein. Learn how your food choices impact the environment with Coco the Koala.">
     <title>CoCo's CO2 Food Comparison | Environmental Impact Calculator</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -24,37 +23,10 @@
         </header>
 
         <main class="main-content">
-            <!-- Food Selection Section -->
-            <section class="food-selection">
-                <h2>Select Foods to Compare</h2>
-                <p class="help-text">Choose at least 2 foods to see their environmental impact</p>
-
-                <div class="food-categories">
-                    <div class="category-group">
-                        <h3 class="category-title">🥩 Animal Products</h3>
-                        <div id="animalFoods" class="food-list"></div>
-                    </div>
-
-                    <div class="category-group">
-                        <h3 class="category-title">🌱 Plant-Based Proteins</h3>
-                        <div id="plantProteinFoods" class="food-list"></div>
-                    </div>
-
-                    <div class="category-group">
-                        <h3 class="category-title">🌾 Grains</h3>
-                        <div id="grainFoods" class="food-list"></div>
-                    </div>
-
-                    <div class="category-group">
-                        <h3 class="category-title">🥕 Vegetables</h3>
-                        <div id="vegetableFoods" class="food-list"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Comparison Mode Selection -->
+            <!-- Comparison Mode Selection - Now First! -->
             <section class="comparison-mode">
-                <h2>Comparison Mode</h2>
+                <h2>Choose Comparison Basis</h2>
+                <p class="help-text">Select how you want to compare food CO2 footprints. The dots will update to show relative impact.</p>
                 <div class="mode-buttons">
                     <button class="mode-btn active" data-mode="weight">Per 100g</button>
                     <button class="mode-btn" data-mode="calories">Per 100 kcal</button>
@@ -63,26 +35,23 @@
                 <p class="mode-description" id="modeDescription">Comparing CO2 emissions per 100 grams of food</p>
             </section>
 
-            <!-- Chart Visualization -->
-            <section class="chart-section">
-                <h2>CO2 Emissions Comparison</h2>
-                <div class="chart-container">
-                    <canvas id="co2Chart"></canvas>
-                </div>
-                <div id="emptyState" class="empty-state">
-                    <p>👆 Select at least 2 foods above to see the comparison</p>
-                </div>
+            <!-- All Foods Visualization - Sorted by CO2 -->
+            <section class="foods-visualization">
+                <h2>All Foods Ranked by CO2 Footprint</h2>
+                <p class="help-text">Foods are ordered from lowest to highest CO2 emissions. Dot size represents environmental impact.</p>
+                <div id="foodsList" class="foods-list"></div>
             </section>
 
             <!-- Detailed Comparison Table -->
             <section class="table-section">
-                <h2>Detailed Comparison</h2>
+                <h2>Detailed Data</h2>
                 <div class="table-container">
                     <table id="comparisonTable">
                         <thead>
                             <tr>
+                                <th>Rank</th>
                                 <th>Food</th>
-                                <th>CO2 (kg)</th>
+                                <th id="co2Header">CO2 (kg)</th>
                                 <th>Calories</th>
                                 <th>Protein (g)</th>
                                 <th>Source</th>
