@@ -6,6 +6,10 @@ let carouselPosition = 0;
 let itemsPerView = 3;
 let totalItems = 0;
 
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartTime = 0;
+
 const modeDescriptions = {
     weight: 'Comparing CO2 emissions per 100 grams of food',
     calories: 'Comparing CO2 emissions per 100 kilocalories',
@@ -35,13 +39,13 @@ function initializeApp() {
 function calculateItemsPerView() {
     const width = window.innerWidth;
     if (width < 480) {
-        itemsPerView = 1;
-    } else if (width < 768) {
-        itemsPerView = 2;
-    } else if (width < 1024) {
         itemsPerView = 3;
-    } else {
+    } else if (width < 768) {
         itemsPerView = 4;
+    } else if (width < 1024) {
+        itemsPerView = 4;
+    } else {
+        itemsPerView = 5;
     }
 }
 
@@ -145,6 +149,11 @@ function setupEventListeners() {
         if (e.key === 'ArrowRight') navigateCarousel(1);
     });
 
+    const carouselWrapper = document.querySelector('.carousel-wrapper');
+    carouselWrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
+    carouselWrapper.addEventListener('touchmove', handleTouchMove, { passive: true });
+    carouselWrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
+
     document.getElementById('viewSourcesLink').addEventListener('click', (e) => {
         e.preventDefault();
         showAllSourcesModal();
@@ -159,6 +168,36 @@ function setupEventListeners() {
             closeModals();
         }
     });
+}
+
+function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartTime = Date.now();
+}
+
+function handleTouchMove(e) {
+    touchEndX = e.touches[0].clientX;
+}
+
+function handleTouchEnd() {
+    if (!touchStartX || !touchEndX) return;
+
+    const swipeDistance = touchStartX - touchEndX;
+    const swipeTime = Date.now() - touchStartTime;
+    const minSwipeDistance = 50;
+    const maxSwipeTime = 500;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance && swipeTime < maxSwipeTime) {
+        if (swipeDistance > 0) {
+            navigateCarousel(1);
+        } else {
+            navigateCarousel(-1);
+        }
+    }
+
+    touchStartX = 0;
+    touchEndX = 0;
+    touchStartTime = 0;
 }
 
 function navigateCarousel(direction) {
