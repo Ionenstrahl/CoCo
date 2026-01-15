@@ -28,6 +28,7 @@ const foodEmojis = {
 };
 
 function initializeApp() {
+    console.log('Initializing app...');
     calculateItemsPerView();
     setupEventListeners();
     renderAllFoods();
@@ -35,6 +36,7 @@ function initializeApp() {
         calculateItemsPerView();
         updateCarouselPosition();
     });
+    console.log('App initialized successfully');
 }
 
 function calculateItemsPerView() {
@@ -51,6 +53,11 @@ function calculateItemsPerView() {
 }
 
 function renderAllFoods() {
+    if (typeof foods === 'undefined' || !foods || foods.length === 0) {
+        console.error('Foods array is not defined or empty');
+        return;
+    }
+
     const foodsWithCO2 = foods.map(food => ({
         ...food,
         co2Value: calculateCO2(food, comparisonMode)
@@ -64,15 +71,18 @@ function renderAllFoods() {
     const container = document.getElementById('foodsList');
     container.innerHTML = '';
 
-    foodsWithCO2.forEach((food, index) => {
-        const foodItem = createFoodItem(food, index + 1);
+    foodsWithCO2.forEach((food) => {
+        const foodItem = createFoodItem(food);
         container.appendChild(foodItem);
     });
 
-    updateCarouselPosition();
+    // Use setTimeout to ensure DOM has rendered before calculating positions
+    setTimeout(() => {
+        updateCarouselPosition();
+    }, 0);
 }
 
-function createFoodItem(food, rank) {
+function createFoodItem(food) {
     const foodItem = document.createElement('div');
     foodItem.className = 'food-item';
 
@@ -96,7 +106,6 @@ function createFoodItem(food, rank) {
     foodItem.appendChild(co2Dot);
     foodItem.appendChild(foodName);
     foodItem.appendChild(co2Value);
-    foodItem.appendChild(infoButton);
 
     return foodItem;
 }
@@ -211,8 +220,9 @@ function navigateCarousel(direction) {
 
 function updateCarouselPosition() {
     const container = document.getElementById('foodsList');
-    const items = container.children;
+    if (!container) return;
 
+    const items = container.children;
     if (items.length === 0) return;
 
     const itemWidth = items[0].offsetWidth;
@@ -223,14 +233,11 @@ function updateCarouselPosition() {
 
     const prevBtn = document.getElementById('carouselPrev');
     const nextBtn = document.getElementById('carouselNext');
-    const positionText = document.getElementById('carouselPosition');
+
+    if (!prevBtn || !nextBtn) return;
 
     prevBtn.disabled = carouselPosition === 0;
     nextBtn.disabled = carouselPosition >= totalItems - itemsPerView;
-
-    const startItem = carouselPosition + 1;
-    const endItem = Math.min(carouselPosition + itemsPerView, totalItems);
-    positionText.textContent = `Showing ${startItem}-${endItem} of ${totalItems} foods`;
 }
 
 function handleModeChange(e) {
@@ -242,13 +249,6 @@ function handleModeChange(e) {
     comparisonMode = e.target.dataset.mode;
 
     document.getElementById('modeDescription').textContent = modeDescriptions[comparisonMode];
-
-    const headerLabels = {
-        weight: 'CO2 per 100g',
-        calories: 'CO2 per 100 kcal',
-        protein: 'CO2 per 10g protein'
-    };
-    document.getElementById('co2Header').textContent = headerLabels[comparisonMode];
 
     renderAllFoods();
 }

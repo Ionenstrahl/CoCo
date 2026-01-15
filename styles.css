@@ -183,17 +183,6 @@ section h2 {
     margin-top: -4px;
 }
 
-.carousel-indicators {
-    text-align: center;
-    margin-top: var(--spacing-md);
-}
-
-.carousel-position {
-    font-size: 0.95rem;
-    color: var(--color-text-light);
-    font-weight: 500;
-}
-
 .food-item {
     display: flex;
     flex-direction: column;
@@ -214,18 +203,6 @@ section h2 {
     border-color: var(--color-secondary);
     transform: translateY(-8px);
     box-shadow: 0 8px 16px var(--color-shadow);
-}
-
-.food-rank {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text-light);
-    flex-shrink: 0;
-}
-
-.food-rank.top-3 {
-    color: var(--color-secondary);
-    font-size: 1.2rem;
 }
 
 .food-image {
@@ -270,6 +247,12 @@ section h2 {
     font-size: 0.8rem;
     color: var(--color-text-light);
     font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.food-co2-value:hover {
+    color: var(--color-secondary);
 }
 
 /* Comparison Mode */
@@ -311,33 +294,6 @@ section h2 {
     font-size: 0.95rem;
     font-style: italic;
 }
-
-/* Chart Section */
-.chart-section {
-    min-height: 400px;
-}
-
-.chart-container {
-    position: relative;
-    height: 400px;
-    display: none;
-}
-
-.chart-container.active {
-    display: block;
-}
-
-.empty-state {
-    text-align: center;
-    padding: var(--spacing-xl);
-    color: var(--color-text-light);
-    font-size: 1.1rem;
-}
-
-.empty-state.hidden {
-    display: none;
-}
-
 
 /* Footer */
 .footer {
@@ -481,14 +437,6 @@ section h2 {
     .food-item {
         min-width: 220px;
     }
-
-    table {
-        font-size: 0.9rem;
-    }
-
-    th, td {
-        padding: var(--spacing-xs);
-    }
 }
 
 @media (max-width: 480px) {
@@ -523,14 +471,6 @@ section h2 {
     .food-item {
         min-width: 90px;
         padding: var(--spacing-xs);
-    }
-
-    .food-rank {
-        font-size: 0.8rem;
-    }
-
-    .food-rank.top-3 {
-        font-size: 0.9rem;
     }
 
     .food-image {
