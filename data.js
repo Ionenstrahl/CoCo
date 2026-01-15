@@ -281,6 +281,22 @@ const foods = [
       url: 'https://doi.org/10.1126/science.aaq0216'
     }
   },
+  {
+    id: 'avocado',
+    name: 'Avocado',
+    category: 'plant_protein',
+    co2PerKg: 0.9,
+    caloriesPer100g: 160,
+    proteinPer100g: 2,
+    fatPer100g: 15,
+    source: {
+      title: 'Environmental impacts of food production',
+      authors: 'Poore, J., & Nemecek, T.',
+      journal: 'Science',
+      year: 2018,
+      url: 'https://doi.org/10.1126/science.aaq0216'
+    }
+  },
 
   // Grains
   {
