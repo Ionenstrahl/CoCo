@@ -43,7 +43,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) 0;
     margin-top: var(--spacing-lg);
 }
 
@@ -109,7 +109,7 @@ body {
 section {
     background: var(--color-white);
     padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
+    border-radius: 0;
     box-shadow: 0 2px 4px var(--color-shadow);
 }
 
@@ -129,7 +129,7 @@ section h2 {
 .foods-visualization {
     background: var(--color-white);
     padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
+    border-radius: 0;
     box-shadow: 0 2px 4px var(--color-shadow);
 }
 
@@ -437,11 +437,12 @@ section h2 {
 
 @media (max-width: 480px) {
     .container {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-sm) 0;
     }
 
     section {
         padding: var(--spacing-md);
+        border-radius: 0;
     }
 
     .header h1 {
