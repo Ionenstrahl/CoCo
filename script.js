@@ -14,6 +14,8 @@ let isDragging = false;
 let currentTranslate = 0;
 let prevTranslate = 0;
 let animationID = null;
+let velocityTracker = [];
+let momentumID = null;
 
 const modeDescriptions = {
     weight: 'Comparing CO2 emissions per 100 grams of food',
@@ -47,7 +49,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 369;
+    const tokens = 441;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -205,6 +207,12 @@ function handleTouchStart(e) {
     touchStartY = e.touches[0].clientY;
     touchStartTime = Date.now();
     isDragging = true;
+    velocityTracker = [];
+
+    if (momentumID) {
+        cancelAnimationFrame(momentumID);
+        momentumID = null;
+    }
 
     const container = document.getElementById('foodsList');
     if (container) {
@@ -233,6 +241,15 @@ function handleTouchMove(e) {
         const moveX = currentX - touchStartX;
         currentTranslate = prevTranslate + moveX;
 
+        velocityTracker.push({
+            position: currentTranslate,
+            time: Date.now()
+        });
+
+        if (velocityTracker.length > 5) {
+            velocityTracker.shift();
+        }
+
         updateCarouselTransform(currentTranslate);
     }
 }
@@ -249,24 +266,45 @@ function handleTouchEnd(e) {
     const gap = 16;
     const itemTotalWidth = itemWidth + gap;
 
-    const movedBy = currentTranslate - prevTranslate;
-    const movedPositions = Math.round(movedBy / itemTotalWidth);
-
-    if (movedPositions !== 0) {
-        carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - movedPositions));
+    let velocity = 0;
+    if (velocityTracker.length >= 2) {
+        const lastPoint = velocityTracker[velocityTracker.length - 1];
+        const firstPoint = velocityTracker[0];
+        const timeDiff = lastPoint.time - firstPoint.time;
+        if (timeDiff > 0) {
+            velocity = (lastPoint.position - firstPoint.position) / timeDiff;
+        }
     }
 
-    container.style.transition = 'transform 0.4s ease-in-out';
-    updateCarouselPosition();
+    if (Math.abs(velocity) > 0.5) {
+        applyMomentum(velocity, itemTotalWidth);
+    } else {
+        const movedBy = currentTranslate - prevTranslate;
+        const movedPositions = Math.round(movedBy / itemTotalWidth);
+
+        if (movedPositions !== 0) {
+            carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - movedPositions));
+        }
+
+        container.style.transition = 'transform 0.4s ease-in-out';
+        updateCarouselPosition();
+    }
 
     touchStartX = 0;
     touchStartY = 0;
+    velocityTracker = [];
 }
 
 function handleMouseDown(e) {
     e.preventDefault();
     touchStartX = e.clientX;
     isDragging = true;
+    velocityTracker = [];
+
+    if (momentumID) {
+        cancelAnimationFrame(momentumID);
+        momentumID = null;
+    }
 
     const container = document.getElementById('foodsList');
     if (container) {
@@ -289,6 +327,15 @@ function handleMouseMove(e) {
     const moveX = currentX - touchStartX;
     currentTranslate = prevTranslate + moveX;
 
+    velocityTracker.push({
+        position: currentTranslate,
+        time: Date.now()
+    });
+
+    if (velocityTracker.length > 5) {
+        velocityTracker.shift();
+    }
+
     updateCarouselTransform(currentTranslate);
 }
 
@@ -306,17 +353,32 @@ function handleMouseUp(e) {
     const gap = 16;
     const itemTotalWidth = itemWidth + gap;
 
-    const movedBy = currentTranslate - prevTranslate;
-    const movedPositions = Math.round(movedBy / itemTotalWidth);
-
-    if (movedPositions !== 0) {
-        carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - movedPositions));
+    let velocity = 0;
+    if (velocityTracker.length >= 2) {
+        const lastPoint = velocityTracker[velocityTracker.length - 1];
+        const firstPoint = velocityTracker[0];
+        const timeDiff = lastPoint.time - firstPoint.time;
+        if (timeDiff > 0) {
+            velocity = (lastPoint.position - firstPoint.position) / timeDiff;
+        }
     }
 
-    container.style.transition = 'transform 0.4s ease-in-out';
-    updateCarouselPosition();
+    if (Math.abs(velocity) > 0.5) {
+        applyMomentum(velocity, itemTotalWidth);
+    } else {
+        const movedBy = currentTranslate - prevTranslate;
+        const movedPositions = Math.round(movedBy / itemTotalWidth);
+
+        if (movedPositions !== 0) {
+            carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - movedPositions));
+        }
+
+        container.style.transition = 'transform 0.4s ease-in-out';
+        updateCarouselPosition();
+    }
 
     touchStartX = 0;
+    velocityTracker = [];
 }
 
 function updateCarouselTransform(translateX) {
@@ -324,6 +386,54 @@ function updateCarouselTransform(translateX) {
     if (!container) return;
 
     container.style.transform = `translateX(${translateX}px)`;
+}
+
+function applyMomentum(velocity, itemTotalWidth) {
+    const container = document.getElementById('foodsList');
+    if (!container || !container.children.length) return;
+
+    const deceleration = 0.95;
+    const minVelocity = 0.05;
+
+    let currentVelocity = velocity;
+    let animationTranslate = currentTranslate;
+
+    const animate = () => {
+        if (Math.abs(currentVelocity) < minVelocity) {
+            const finalTranslate = animationTranslate;
+            const targetOffset = -(carouselPosition * itemTotalWidth);
+            const distanceFromTarget = finalTranslate - targetOffset;
+            const positionsFromTarget = Math.round(distanceFromTarget / itemTotalWidth);
+
+            carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - positionsFromTarget));
+
+            container.style.transition = 'transform 0.3s ease-out';
+            updateCarouselPosition();
+            momentumID = null;
+            return;
+        }
+
+        currentVelocity *= deceleration;
+        animationTranslate += currentVelocity * 16;
+
+        const maxTranslate = 0;
+        const minTranslate = -((totalItems - itemsPerView) * itemTotalWidth);
+
+        if (animationTranslate > maxTranslate) {
+            animationTranslate = maxTranslate;
+            currentVelocity = 0;
+        } else if (animationTranslate < minTranslate) {
+            animationTranslate = minTranslate;
+            currentVelocity = 0;
+        }
+
+        currentTranslate = animationTranslate;
+        updateCarouselTransform(animationTranslate);
+
+        momentumID = requestAnimationFrame(animate);
+    };
+
+    momentumID = requestAnimationFrame(animate);
 }
 
 function navigateCarousel(direction) {
