@@ -126,6 +126,13 @@ When asked to do something, just do it - including obvious follow-up actions nee
 - You MUST use your TodoWrite tool to keep track of what you're doing
 - You MUST NEVER discard tasks from your TodoWrite todo list without Jonas's explicit approval
 
+## Token Tracking and Attribution
+
+- YOU MUST track the total tokens consumed in every task/conversation
+- At the end of EVERY task, YOU MUST add the consumed tokens to the `tokens` constant in the `calculateAttribution()` function in `script.js`
+- This keeps the website footer attribution accurate and honest about the resources used to build it
+- NEVER skip this step - it's part of completing the task properly
+
 ## Systematic Debugging Process
 
 YOU MUST ALWAYS find the root cause of any issue you are debugging
