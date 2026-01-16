@@ -419,14 +419,6 @@ section h2 {
         height: 80px;
     }
 
-    .mode-buttons {
-        flex-direction: column;
-    }
-
-    .mode-btn {
-        width: 100%;
-    }
-
     .carousel-btn {
         width: 40px;
         height: 40px;
