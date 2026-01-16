@@ -47,7 +47,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 306;
+    const tokens = 369;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -250,13 +250,10 @@ function handleTouchEnd(e) {
     const itemTotalWidth = itemWidth + gap;
 
     const movedBy = currentTranslate - prevTranslate;
+    const movedPositions = Math.round(movedBy / itemTotalWidth);
 
-    if (Math.abs(movedBy) > 50) {
-        if (movedBy > 0) {
-            carouselPosition = Math.max(0, carouselPosition - 1);
-        } else {
-            carouselPosition = Math.min(totalItems - itemsPerView, carouselPosition + 1);
-        }
+    if (movedPositions !== 0) {
+        carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - movedPositions));
     }
 
     container.style.transition = 'transform 0.4s ease-in-out';
@@ -307,15 +304,13 @@ function handleMouseUp(e) {
 
     const itemWidth = container.children[0].offsetWidth;
     const gap = 16;
+    const itemTotalWidth = itemWidth + gap;
 
     const movedBy = currentTranslate - prevTranslate;
+    const movedPositions = Math.round(movedBy / itemTotalWidth);
 
-    if (Math.abs(movedBy) > 50) {
-        if (movedBy > 0) {
-            carouselPosition = Math.max(0, carouselPosition - 1);
-        } else {
-            carouselPosition = Math.min(totalItems - itemsPerView, carouselPosition + 1);
-        }
+    if (movedPositions !== 0) {
+        carouselPosition = Math.max(0, Math.min(totalItems - itemsPerView, carouselPosition - movedPositions));
     }
 
     container.style.transition = 'transform 0.4s ease-in-out';
