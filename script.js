@@ -10,6 +10,10 @@ let touchStartX = 0;
 let touchEndX = 0;
 let touchStartY = 0;
 let touchStartTime = 0;
+let isDragging = false;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let animationID = null;
 
 const modeDescriptions = {
     weight: 'Comparing CO2 emissions per 100 grams of food',
@@ -43,7 +47,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 248;
+    const tokens = 306;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -170,9 +174,15 @@ function setupEventListeners() {
     });
 
     const carouselWrapper = document.querySelector('.carousel-wrapper');
+
     carouselWrapper.addEventListener('touchstart', handleTouchStart, { passive: false });
     carouselWrapper.addEventListener('touchmove', handleTouchMove, { passive: false });
     carouselWrapper.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    carouselWrapper.addEventListener('mousedown', handleMouseDown);
+    carouselWrapper.addEventListener('mousemove', handleMouseMove);
+    carouselWrapper.addEventListener('mouseup', handleMouseUp);
+    carouselWrapper.addEventListener('mouseleave', handleMouseUp);
 
     document.getElementById('viewSourcesLink').addEventListener('click', (e) => {
         e.preventDefault();
@@ -194,49 +204,142 @@ function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
     touchStartTime = Date.now();
+    isDragging = true;
+
+    const container = document.getElementById('foodsList');
+    if (container) {
+        container.style.transition = 'none';
+        const transform = window.getComputedStyle(container).transform;
+        if (transform !== 'none') {
+            const matrix = new DOMMatrix(transform);
+            prevTranslate = matrix.m41;
+            currentTranslate = prevTranslate;
+        }
+    }
 }
 
 function handleTouchMove(e) {
-    if (!touchStartX) return;
+    if (!isDragging) return;
 
-    touchEndX = e.touches[0].clientX;
-    const touchEndY = e.touches[0].clientY;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
 
-    const deltaX = Math.abs(touchEndX - touchStartX);
-    const deltaY = Math.abs(touchEndY - touchStartY);
+    const deltaX = Math.abs(currentX - touchStartX);
+    const deltaY = Math.abs(currentY - touchStartY);
 
     if (deltaX > deltaY && deltaX > 10) {
         e.preventDefault();
+
+        const moveX = currentX - touchStartX;
+        currentTranslate = prevTranslate + moveX;
+
+        updateCarouselTransform(currentTranslate);
     }
 }
 
 function handleTouchEnd(e) {
-    touchEndX = e.changedTouches[0].clientX;
+    if (!isDragging) return;
 
-    if (!touchStartX) return;
+    isDragging = false;
 
-    const swipeDistance = touchStartX - touchEndX;
-    const swipeTime = Date.now() - touchStartTime;
-    const minSwipeDistance = 50;
-    const maxSwipeTime = 500;
+    const container = document.getElementById('foodsList');
+    if (!container || !container.children.length) return;
 
-    if (Math.abs(swipeDistance) > minSwipeDistance && swipeTime < maxSwipeTime) {
-        if (swipeDistance > 0) {
-            navigateCarousel(1);
+    const itemWidth = container.children[0].offsetWidth;
+    const gap = 16;
+    const itemTotalWidth = itemWidth + gap;
+
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (Math.abs(movedBy) > 50) {
+        if (movedBy > 0) {
+            carouselPosition = Math.max(0, carouselPosition - 1);
         } else {
-            navigateCarousel(-1);
+            carouselPosition = Math.min(totalItems - itemsPerView, carouselPosition + 1);
         }
     }
 
+    container.style.transition = 'transform 0.4s ease-in-out';
+    updateCarouselPosition();
+
     touchStartX = 0;
-    touchEndX = 0;
     touchStartY = 0;
-    touchStartTime = 0;
+}
+
+function handleMouseDown(e) {
+    e.preventDefault();
+    touchStartX = e.clientX;
+    isDragging = true;
+
+    const container = document.getElementById('foodsList');
+    if (container) {
+        container.style.transition = 'none';
+        container.style.cursor = 'grabbing';
+        const transform = window.getComputedStyle(container).transform;
+        if (transform !== 'none') {
+            const matrix = new DOMMatrix(transform);
+            prevTranslate = matrix.m41;
+            currentTranslate = prevTranslate;
+        }
+    }
+}
+
+function handleMouseMove(e) {
+    if (!isDragging) return;
+
+    e.preventDefault();
+    const currentX = e.clientX;
+    const moveX = currentX - touchStartX;
+    currentTranslate = prevTranslate + moveX;
+
+    updateCarouselTransform(currentTranslate);
+}
+
+function handleMouseUp(e) {
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    const container = document.getElementById('foodsList');
+    if (!container || !container.children.length) return;
+
+    container.style.cursor = 'grab';
+
+    const itemWidth = container.children[0].offsetWidth;
+    const gap = 16;
+
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (Math.abs(movedBy) > 50) {
+        if (movedBy > 0) {
+            carouselPosition = Math.max(0, carouselPosition - 1);
+        } else {
+            carouselPosition = Math.min(totalItems - itemsPerView, carouselPosition + 1);
+        }
+    }
+
+    container.style.transition = 'transform 0.4s ease-in-out';
+    updateCarouselPosition();
+
+    touchStartX = 0;
+}
+
+function updateCarouselTransform(translateX) {
+    const container = document.getElementById('foodsList');
+    if (!container) return;
+
+    container.style.transform = `translateX(${translateX}px)`;
 }
 
 function navigateCarousel(direction) {
     const maxPosition = totalItems - itemsPerView;
     carouselPosition = Math.max(0, Math.min(carouselPosition + direction, maxPosition));
+
+    const container = document.getElementById('foodsList');
+    if (container) {
+        container.style.transition = 'transform 0.4s ease-in-out';
+    }
+
     updateCarouselPosition();
 }
 
@@ -252,6 +355,9 @@ function updateCarouselPosition() {
     const offset = -(carouselPosition * (itemWidth + gap));
 
     container.style.transform = `translateX(${offset}px)`;
+
+    prevTranslate = offset;
+    currentTranslate = offset;
 
     const prevBtn = document.getElementById('carouselPrev');
     const nextBtn = document.getElementById('carouselNext');
