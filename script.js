@@ -45,11 +45,19 @@ function initializeApp() {
 function calculateAttribution() {
     const tokens = 170;
     const costPerToken = 0.015;
-    const co2PerToken = 0.004;
+    const co2PerToken = 0.0045;
 
-    document.getElementById('tokens').textContent = tokens;
-    document.getElementById('cost').textContent = (tokens * costPerToken).toFixed(2);
-    document.getElementById('co2').textContent = (tokens * co2PerToken).toFixed(3);
+    const tokensEl = document.getElementById('tokens');
+    const costEl = document.getElementById('cost');
+    const co2El = document.getElementById('co2');
+
+    if (tokensEl && costEl && co2El) {
+        tokensEl.textContent = tokens;
+        costEl.textContent = (tokens * costPerToken).toFixed(2);
+        co2El.textContent = (tokens * co2PerToken).toFixed(2);
+    } else {
+        console.error('Attribution elements not found');
+    }
 }
 
 
