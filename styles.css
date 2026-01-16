@@ -148,6 +148,8 @@ section h2 {
     user-select: none;
     -webkit-user-select: none;
     cursor: grab;
+    margin-left: calc(-1 * var(--spacing-lg));
+    margin-right: calc(-1 * var(--spacing-lg));
 }
 
 .carousel-wrapper:active {
@@ -451,6 +453,12 @@ section h2 {
 
     .carousel-container {
         gap: var(--spacing-xs);
+        margin: var(--spacing-lg) 0;
+    }
+
+    .carousel-wrapper {
+        margin-left: calc(-1 * var(--spacing-md));
+        margin-right: calc(-1 * var(--spacing-md));
     }
 
     .carousel-btn {
