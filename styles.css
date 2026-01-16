@@ -46,43 +46,51 @@ body {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    background: rgba(0, 0, 0, 0.8);
     color: var(--color-white);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    margin-bottom: var(--spacing-lg);
-    box-shadow: 0 4px 6px var(--color-shadow);
+    padding: var(--spacing-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
 .header-content {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.koala-mascot {
-    flex-shrink: 0;
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.5px;
 }
 
-.koala-mascot img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    padding: var(--spacing-sm);
+/* Hero Image */
+.hero-image {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: var(--spacing-lg);
 }
 
-.header-text h1 {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-xs);
-    font-weight: 700;
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-.tagline {
-    font-size: 1.2rem;
-    opacity: 0.95;
-    font-weight: 400;
+@media (min-width: 768px) {
+    .hero-image {
+        max-height: 400px;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
 }
 
 /* Main Content */
@@ -406,17 +414,8 @@ section h2 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header-text h1 {
-        font-size: 1.8rem;
-    }
-
-    .tagline {
-        font-size: 1rem;
-    }
-
-    .koala-mascot img {
-        width: 80px;
-        height: 80px;
+    .header h1 {
+        font-size: 1.25rem;
     }
 
     .carousel-btn {
@@ -439,13 +438,8 @@ section h2 {
         padding: var(--spacing-md);
     }
 
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .header-text h1 {
-        font-size: 1.5rem;
+    .header h1 {
+        font-size: 1.1rem;
     }
 
     .carousel-container {
