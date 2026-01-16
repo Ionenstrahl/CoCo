@@ -119,14 +119,8 @@ section h2 {
     font-size: 1.8rem;
 }
 
-.help-text {
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-md);
-    font-size: 0.95rem;
-}
-
-/* Foods Visualization - Carousel */
-.foods-visualization {
+/* Food Comparison Section */
+.food-comparison {
     background: var(--color-white);
     padding: var(--spacing-lg);
     border-radius: 0;
@@ -138,7 +132,8 @@ section h2 {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-    margin: var(--spacing-lg) 0;
+    margin-top: var(--spacing-lg);
+    margin-bottom: 0;
 }
 
 .carousel-wrapper {
@@ -270,17 +265,13 @@ section h2 {
     color: var(--color-secondary);
 }
 
-/* Comparison Mode */
-.comparison-mode {
-    text-align: center;
-}
-
+/* Mode Selection Buttons */
 .mode-buttons {
     display: flex;
     gap: var(--spacing-sm);
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 0;
 }
 
 .mode-btn {
@@ -302,12 +293,6 @@ section h2 {
 .mode-btn.active {
     background: var(--color-secondary);
     color: var(--color-white);
-}
-
-.mode-description {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    font-style: italic;
 }
 
 /* Footer */

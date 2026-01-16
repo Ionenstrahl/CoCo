@@ -17,11 +17,6 @@ let animationID = null;
 let velocityTracker = [];
 let momentumID = null;
 
-const modeDescriptions = {
-    weight: 'Comparing CO2 emissions per 100 grams of food',
-    calories: 'Comparing CO2 emissions per 100 kilocalories',
-    protein: 'Comparing CO2 emissions per 10 grams of protein'
-};
 
 const foodEmojis = {
     beef: '🥩', lamb: '🐑', pork: '🐷', chicken: '🍗',
@@ -49,7 +44,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 904;
+    const tokens = 1013;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -480,8 +475,6 @@ function handleModeChange(e) {
 
     e.target.classList.add('active');
     comparisonMode = e.target.dataset.mode;
-
-    document.getElementById('modeDescription').textContent = modeDescriptions[comparisonMode];
 
     renderAllFoods();
 }
