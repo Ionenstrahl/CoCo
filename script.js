@@ -27,8 +27,11 @@ const foodEmojis = {
     potatoes: '🥔', tomatoes: '🍅', broccoli: '🥦', carrots: '🥕'
 };
 
+
+
 function initializeApp() {
     console.log('Initializing app...');
+    calculateAttribution();
     calculateItemsPerView();
     setupEventListeners();
     renderAllFoods();
@@ -38,6 +41,17 @@ function initializeApp() {
     });
     console.log('App initialized successfully');
 }
+
+function calculateAttribution() {
+    const tokens = 170;
+    const costPerToken = 0.015;
+    const co2PerToken = 0.004;
+
+    document.getElementById('tokens').textContent = tokens;
+    document.getElementById('cost').textContent = (tokens * costPerToken).toFixed(2);
+    document.getElementById('co2').textContent = (tokens * co2PerToken).toFixed(3);
+}
+
 
 function calculateItemsPerView() {
     const width = window.innerWidth;
