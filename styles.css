@@ -64,7 +64,7 @@ body {
 
 .hero-overlay {
     position: absolute;
-    top: 50%;
+    top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -87,7 +87,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--color-white);
     margin: var(--spacing-xs) 0 0 0;
     text-shadow:
@@ -139,9 +139,9 @@ body {
 
 /* Header Styles */
 .header {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     color: var(--color-white);
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     position: fixed;
     top: 0;
     left: 0;
@@ -156,10 +156,15 @@ body {
 }
 
 .header h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--color-white);
     margin: 0;
-    letter-spacing: 0.5px;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(0, 0, 0, 0.15);
+    letter-spacing: 1px;
 }
 
 /* Main Content */
@@ -603,7 +608,7 @@ section h2 {
     }
 
     .header h1 {
-        font-size: 1.1rem;
+        font-size: 2rem;
     }
 
     .controls-group {
