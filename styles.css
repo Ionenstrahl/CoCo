@@ -203,8 +203,8 @@ section h2 {
 }
 
 .food-image {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     object-fit: cover;
     border-radius: 50%;
     background: #f0f0f0;
@@ -215,7 +215,7 @@ section h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .food-details {
@@ -425,12 +425,12 @@ section h2 {
     }
 
     .food-image {
-        width: 35px;
-        height: 35px;
+        width: 48px;
+        height: 48px;
     }
 
     .food-image.placeholder {
-        font-size: 1.3rem;
+        font-size: 1.75rem;
     }
 
     .category-btn {
@@ -474,12 +474,12 @@ section h2 {
     }
 
     .food-image {
-        width: 32px;
-        height: 32px;
+        width: 44px;
+        height: 44px;
     }
 
     .food-image.placeholder {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
     }
 
     .food-name {
