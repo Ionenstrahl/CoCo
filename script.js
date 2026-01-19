@@ -25,7 +25,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1066;
+    const tokens = 1071;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -99,17 +99,11 @@ function createFoodItem(food, maxCO2) {
     co2Value.textContent = `${food.co2Value.toFixed(3)} kg CO2`;
     co2Value.addEventListener('click', () => showSourceModal(food));
 
-    const co2Dot = document.createElement('div');
-    co2Dot.className = 'co2-indicator';
-    co2Dot.style.backgroundColor = barColor;
-    co2Dot.title = `${food.co2Value.toFixed(3)} kg CO2`;
-
     foodDetails.appendChild(foodName);
     foodDetails.appendChild(co2Value);
 
     foodInfo.appendChild(foodImage);
     foodInfo.appendChild(foodDetails);
-    foodInfo.appendChild(co2Dot);
 
     foodItem.appendChild(foodBar);
     foodItem.appendChild(foodInfo);
