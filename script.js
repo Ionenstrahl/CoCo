@@ -33,7 +33,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1268;
+    const tokens = 1308;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -43,8 +43,8 @@ function calculateAttribution() {
 
     if (tokensEl && costEl && co2El) {
         tokensEl.textContent = tokens;
-        costEl.textContent = (tokens * costPerToken).toFixed(2);
-        co2El.textContent = (tokens * co2PerToken).toFixed(2);
+        costEl.textContent = Math.round(tokens * costPerToken);
+        co2El.textContent = Math.round(tokens * co2PerToken);
     } else {
         console.error('Attribution elements not found');
     }
