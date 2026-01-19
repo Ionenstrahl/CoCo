@@ -233,66 +233,136 @@ section h2 {
     text-decoration: underline;
 }
 
-/* Mode Selection Buttons */
+/* Mode Selection Buttons - Radio Style */
 .mode-buttons {
     display: flex;
-    gap: var(--spacing-sm);
+    gap: 0;
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: var(--spacing-md);
+    background: var(--color-background);
+    padding: 4px;
+    border-radius: 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .mode-btn {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    font-size: 1rem;
-    font-weight: 600;
-    border: 2px solid var(--color-secondary);
-    background: var(--color-white);
-    color: var(--color-secondary);
-    border-radius: var(--border-radius);
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--color-text);
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.25s ease;
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mode-btn::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    transition: all 0.25s ease;
+    display: inline-block;
 }
 
 .mode-btn:hover {
-    background: rgba(92, 141, 58, 0.1);
+    color: var(--color-primary);
+}
+
+.mode-btn:hover::before {
+    border-color: var(--color-secondary);
 }
 
 .mode-btn.active {
-    background: var(--color-secondary);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-primary);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-/* Category Filter Buttons */
+.mode-btn.active::before {
+    border-color: var(--color-secondary);
+    background: var(--color-secondary);
+    box-shadow: inset 0 0 0 3px var(--color-white);
+}
+
+/* Category Filter Buttons - Checkbox Style */
 .category-buttons {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-sm);
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 0;
 }
 
 .category-btn {
-    padding: var(--spacing-xs) var(--spacing-md);
-    font-size: 0.875rem;
+    padding: 8px 18px;
+    font-size: 0.9rem;
     font-weight: 500;
     border: 2px solid var(--color-border);
     background: var(--color-white);
     color: var(--color-text);
-    border-radius: calc(var(--border-radius) / 1.5);
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.category-btn::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    transition: all 0.25s ease;
+    display: inline-block;
+    position: relative;
 }
 
 .category-btn:hover {
     border-color: var(--color-secondary);
-    background: rgba(92, 141, 58, 0.05);
+    background: rgba(92, 141, 58, 0.03);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.category-btn:hover::before {
+    border-color: var(--color-secondary);
 }
 
 .category-btn.active {
-    background: var(--color-accent);
-    border-color: var(--color-accent);
+    background: var(--color-white);
+    border-color: var(--color-secondary);
     color: var(--color-primary);
+    font-weight: 600;
+}
+
+.category-btn.active::before {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+.category-btn.active::after {
+    content: '✓';
+    position: absolute;
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: -14px;
+    margin-top: 1px;
 }
 
 /* Footer */
@@ -420,9 +490,24 @@ section h2 {
         font-size: 1.75rem;
     }
 
+    .mode-btn {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+    }
+
+    .mode-btn::before {
+        width: 12px;
+        height: 12px;
+    }
+
     .category-btn {
-        font-size: 0.8rem;
-        padding: 6px 12px;
+        font-size: 0.85rem;
+        padding: 7px 14px;
+    }
+
+    .category-btn::before {
+        width: 14px;
+        height: 14px;
     }
 }
 
@@ -440,14 +525,35 @@ section h2 {
         font-size: 1.1rem;
     }
 
+    .mode-buttons {
+        padding: 3px;
+    }
+
     .mode-btn {
-        font-size: 0.9rem;
-        padding: 10px 16px;
+        font-size: 0.85rem;
+        padding: 7px 16px;
+        gap: 4px;
+    }
+
+    .mode-btn::before {
+        width: 11px;
+        height: 11px;
     }
 
     .category-btn {
-        font-size: 0.75rem;
-        padding: 6px 10px;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        gap: 6px;
+    }
+
+    .category-btn::before {
+        width: 13px;
+        height: 13px;
+    }
+
+    .category-btn.active::after {
+        font-size: 11px;
+        margin-left: -12px;
     }
 
     .food-item {
