@@ -643,8 +643,17 @@ section {
         padding: var(--spacing-md);
     }
 
+    .hero-title,
+    .hero-subtitle {
+        color: #ffffff !important;
+    }
+
     .header {
         background: rgba(26, 29, 33, 0.95);
+    }
+
+    .header h1 {
+        color: #ffffff;
     }
 
     .mode-buttons {
