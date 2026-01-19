@@ -74,7 +74,7 @@ body {
 .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
-    color: var(--color-white);
+    color: var(--color-text);
     margin: 0;
     text-shadow:
         0 2px 4px rgba(0, 0, 0, 0.3),
@@ -87,7 +87,7 @@ body {
 .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--color-white);
+    color: var(--color-text);
     margin: var(--spacing-xs) 0 0 0;
     text-shadow:
         0 2px 4px rgba(0, 0, 0, 0.4),
@@ -142,7 +142,7 @@ body {
 /* Header Styles */
 .header {
     background: rgba(0, 0, 0, 0.6);
-    color: var(--color-white);
+    color: var(--color-text);
     padding: var(--spacing-sm);
     position: fixed;
     top: 0;
@@ -160,7 +160,7 @@ body {
 .header h1 {
     font-size: 3.5rem;
     font-weight: 800;
-    color: var(--color-white);
+    color: var(--color-text);
     margin: 0;
     text-shadow:
         0 2px 4px rgba(0, 0, 0, 0.3),
@@ -178,7 +178,7 @@ body {
 
 section {
     background: var(--color-white);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-lg);h
     border-radius: 0;
     box-shadow: 0 2px 4px var(--color-shadow);
 }
@@ -637,23 +637,10 @@ section {
         background-color: #13161a;
     }
 
-    .hero-overlay {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
-        padding: var(--spacing-md);
-    }
 
-    .hero-title,
-    .hero-subtitle {
-        color: #ffffff !important;
-    }
 
     .header {
-        background: rgba(26, 29, 33, 0.95);
-    }
-
-    .header h1 {
-        color: #ffffff;
+        background: rgba(26, 29, 33, 0.);
     }
 
     .mode-buttons {
