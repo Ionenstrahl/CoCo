@@ -33,7 +33,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1140;
+    const tokens = 1144;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -70,37 +70,16 @@ function renderAllFoods() {
         return;
     }
 
+    foodsWithCO2.sort((a, b) => a.co2Value - b.co2Value);
+
     const maxCO2 = Math.max(...foodsWithCO2.map(f => f.co2Value));
-
-    const groupedByCategory = {};
-    foodsWithCO2.forEach(food => {
-        if (!groupedByCategory[food.category]) {
-            groupedByCategory[food.category] = [];
-        }
-        groupedByCategory[food.category].push(food);
-    });
-
-    Object.values(groupedByCategory).forEach(group => {
-        group.sort((a, b) => a.co2Value - b.co2Value);
-    });
-
-    const categoryOrder = ['vegetable', 'grain', 'plant_protein', 'animal'];
 
     const container = document.getElementById('foodsList');
     container.innerHTML = '';
 
-    categoryOrder.forEach(category => {
-        if (!groupedByCategory[category]) return;
-
-        const categoryHeader = document.createElement('div');
-        categoryHeader.className = 'category-header';
-        categoryHeader.textContent = categoryNames[category];
-        container.appendChild(categoryHeader);
-
-        groupedByCategory[category].forEach((food) => {
-            const foodItem = createFoodItem(food, maxCO2);
-            container.appendChild(foodItem);
-        });
+    foodsWithCO2.forEach((food) => {
+        const foodItem = createFoodItem(food, maxCO2);
+        container.appendChild(foodItem);
     });
 }
 
