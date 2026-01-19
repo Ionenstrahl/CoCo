@@ -230,16 +230,9 @@ section {
     padding: var(--spacing-sm);
     background: var(--color-background);
     border-radius: var(--border-radius);
-    transition: all 0.3s;
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
-}
-
-.food-item:hover {
-    background-color: rgba(122, 155, 118, 0.08);
-    border-color: var(--color-secondary);
-    box-shadow: 0 4px 8px var(--color-shadow);
 }
 
 .food-bar {
@@ -250,10 +243,6 @@ section {
     transition: width 0.6s ease-in-out;
     opacity: 0.15;
     z-index: 0;
-}
-
-.food-item:hover .food-bar {
-    opacity: 0.25;
 }
 
 .food-info {
@@ -681,17 +670,8 @@ section {
         border-color: transparent;
     }
 
-    .food-item:hover {
-        background-color: #33362f;
-        border-color: var(--color-secondary);
-    }
-
     .food-bar {
         opacity: 0.4;
-    }
-
-    .food-item:hover .food-bar {
-        opacity: 0.55;
     }
 
     .food-image {
