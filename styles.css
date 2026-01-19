@@ -43,8 +43,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-md) 0;
-    margin-top: var(--spacing-lg);
 }
 
 /* Hero Image */
@@ -99,13 +97,16 @@ body {
 @media (min-width: 768px) {
     .hero-image {
         max-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: center center;
     }
 
     .hero-title {
@@ -598,10 +599,6 @@ section h2 {
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: var(--spacing-sm) 0;
-    }
-
     section {
         padding: var(--spacing-md);
         border-radius: 0;
