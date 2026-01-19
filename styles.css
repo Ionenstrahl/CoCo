@@ -660,17 +660,17 @@ section {
         background: rgba(122, 155, 118, 0.2);
     }
 
-    .category-btn.active {
-        background: var(--color-secondary);
+    .category-buttons .category-btn.active {
+        background: #92b88e;
         color: #ffffff;
     }
 
-    .food-item {
-        background: var(--color-background);
+    .foods-bars .food-item {
+        background: #1c1f1b;
         border-color: transparent;
     }
 
-    .food-bar {
+    .food-item .food-bar {
         opacity: 0.4;
     }
 
