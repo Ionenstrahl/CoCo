@@ -677,7 +677,7 @@ section {
     }
 
     .food-item {
-        background: #2a2d28;
+        background: var(--color-background);
         border-color: transparent;
     }
 
