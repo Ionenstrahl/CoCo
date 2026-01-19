@@ -33,7 +33,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1144;
+    const tokens = 1153;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -57,12 +57,16 @@ function renderAllFoods() {
         return;
     }
 
-    const foodsWithCO2 = foods
+    const allFoodsWithCO2 = foods
         .map(food => ({
             ...food,
             co2Value: calculateCO2(food, comparisonMode)
         }))
-        .filter(food => food.co2Value !== null && activeCategories.has(food.category));
+        .filter(food => food.co2Value !== null);
+
+    const maxCO2AllCategories = Math.max(...allFoodsWithCO2.map(f => f.co2Value));
+
+    const foodsWithCO2 = allFoodsWithCO2.filter(food => activeCategories.has(food.category));
 
     if (foodsWithCO2.length === 0) {
         const container = document.getElementById('foodsList');
@@ -78,17 +82,18 @@ function renderAllFoods() {
     container.innerHTML = '';
 
     foodsWithCO2.forEach((food) => {
-        const foodItem = createFoodItem(food, maxCO2);
+        const foodItem = createFoodItem(food, maxCO2, maxCO2AllCategories);
         container.appendChild(foodItem);
     });
 }
 
-function createFoodItem(food, maxCO2) {
+function createFoodItem(food, maxCO2, maxCO2AllCategories) {
     const foodItem = document.createElement('div');
     foodItem.className = 'food-item';
 
     const barWidth = (food.co2Value / maxCO2) * 100;
-    const barColor = getColorForCO2(food.co2Value);
+    const percentageAllCategories = (food.co2Value / maxCO2AllCategories) * 100;
+    const barColor = getColorForPercentage(percentageAllCategories);
 
     const foodBar = document.createElement('div');
     foodBar.className = 'food-bar';
@@ -198,12 +203,12 @@ function calculateCO2(food, mode) {
     }
 }
 
-function getColorForCO2(value) {
-    if (value < 0.5) return '#4caf50';
-    if (value < 1.5) return '#8bc34a';
-    if (value < 3.0) return '#cddc39';
-    if (value < 5.0) return '#ffeb3b';
-    if (value < 10.0) return '#ff9800';
+function getColorForPercentage(percentage) {
+    if (percentage < 16.67) return '#4caf50';
+    if (percentage < 33.33) return '#8bc34a';
+    if (percentage < 50.0) return '#cddc39';
+    if (percentage < 66.67) return '#ffeb3b';
+    if (percentage < 83.33) return '#ff9800';
     return '#f44336';
 }
 

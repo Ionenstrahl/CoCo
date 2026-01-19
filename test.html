@@ -162,29 +162,29 @@
         });
 
         // Test 7: Color coding function
-        test('Color coding function works', () => {
-            const getColorForCO2 = (value) => {
-                if (value < 0.5) return '#4caf50';
-                if (value < 1.5) return '#8bc34a';
-                if (value < 3.0) return '#cddc39';
-                if (value < 5.0) return '#ffeb3b';
-                if (value < 10.0) return '#ff9800';
+        test('Percentage-based color coding works', () => {
+            const getColorForPercentage = (percentage) => {
+                if (percentage < 16.67) return '#4caf50';
+                if (percentage < 33.33) return '#8bc34a';
+                if (percentage < 50.0) return '#cddc39';
+                if (percentage < 66.67) return '#ffeb3b';
+                if (percentage < 83.33) return '#ff9800';
                 return '#f44336';
             };
 
             const tests = [
-                { value: 0.3, expected: '#4caf50' },
-                { value: 1.0, expected: '#8bc34a' },
-                { value: 2.5, expected: '#cddc39' },
-                { value: 4.0, expected: '#ffeb3b' },
-                { value: 8.0, expected: '#ff9800' },
-                { value: 15.0, expected: '#f44336' }
+                { percentage: 10, expected: '#4caf50' },
+                { percentage: 25, expected: '#8bc34a' },
+                { percentage: 45, expected: '#cddc39' },
+                { percentage: 60, expected: '#ffeb3b' },
+                { percentage: 75, expected: '#ff9800' },
+                { percentage: 90, expected: '#f44336' }
             ];
 
             for (const t of tests) {
-                const color = getColorForCO2(t.value);
+                const color = getColorForPercentage(t.percentage);
                 if (color !== t.expected) {
-                    return { pass: false, message: `Value ${t.value} returned ${color}, expected ${t.expected}` };
+                    return { pass: false, message: `Percentage ${t.percentage} returned ${color}, expected ${t.expected}` };
                 }
             }
 
@@ -247,6 +247,30 @@
             }
 
             return { pass: true, message: `All max: ${allMax.toFixed(3)}, Veg max: ${vegMax.toFixed(3)}` };
+        });
+
+        // Test 11: Color based on all categories percentage
+        test('Colors based on all-category percentage', () => {
+            const allFoodsWithCO2 = foods.map(food => ({
+                ...food,
+                co2Value: food.co2PerKg / 10
+            }));
+
+            const maxAllCategories = Math.max(...allFoodsWithCO2.map(f => f.co2Value));
+            const vegetableOnly = allFoodsWithCO2.filter(f => f.category === 'vegetable');
+
+            const vegFood = vegetableOnly[0];
+            const percentageAllCat = (vegFood.co2Value / maxAllCategories) * 100;
+
+            if (percentageAllCat > 100) {
+                return { pass: false, message: 'Percentage should not exceed 100' };
+            }
+
+            if (percentageAllCat < 0) {
+                return { pass: false, message: 'Percentage should not be negative' };
+            }
+
+            return { pass: true, message: `Vegetable percentage in full scale: ${percentageAllCat.toFixed(2)}%` };
         });
 
         // Render results
