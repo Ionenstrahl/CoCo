@@ -622,6 +622,105 @@ section {
     }
 }
 
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #1a1d21;
+        --color-white: #2a2e33;
+        --color-text: #e4e6e8;
+        --color-text-light: #9ca3ab;
+        --color-border: #404449;
+        --color-shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+        background-color: #13161a;
+    }
+
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        padding: var(--spacing-md);
+    }
+
+    .header {
+        background: rgba(26, 29, 33, 0.95);
+    }
+
+    .mode-buttons {
+        background: #1a1d21;
+        border-color: #404449;
+    }
+
+    .mode-btn {
+        color: #b0b5bb;
+    }
+
+    .mode-btn.active {
+        background: #2a2e33;
+        color: #e4e6e8;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .category-btn {
+        background: #2a2e33;
+        border-color: #404449;
+        color: #b0b5bb;
+    }
+
+    .category-btn:hover {
+        background: rgba(92, 141, 58, 0.15);
+    }
+
+    .category-btn.active {
+        background: var(--color-secondary);
+        color: #ffffff;
+    }
+
+    .food-item {
+        background: #2a2e33;
+        border-color: transparent;
+    }
+
+    .food-item:hover {
+        background-color: #32373d;
+        border-color: var(--color-secondary);
+    }
+
+    .food-bar {
+        opacity: 0.4;
+    }
+
+    .food-item:hover .food-bar {
+        opacity: 0.55;
+    }
+
+    .food-image {
+        background: #1a1d21;
+    }
+
+    .modal {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+        background-color: #2a2e33;
+    }
+
+    .modal-close {
+        color: #9ca3ab;
+    }
+
+    .modal-close:hover {
+        color: #e4e6e8;
+    }
+
+    .source-item {
+        border-color: #404449;
+        background: #1a1d21;
+    }
+}
+
 /* Accessibility */
 :focus-visible {
     outline: 2px solid var(--color-accent);
