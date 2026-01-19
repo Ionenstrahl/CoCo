@@ -33,7 +33,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1213;
+    const tokens = 1222;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 

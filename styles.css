@@ -365,10 +365,10 @@ section {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Category Filter Buttons - Checkbox Style */
+/* Category Filter Buttons - Toggle Style */
 .category-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 0;
@@ -384,56 +384,19 @@ section {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     white-space: nowrap;
-}
-
-.category-btn::before {
-    content: '';
-    width: 14px;
-    height: 14px;
-    border: 1.5px solid #c0c5ca;
-    border-radius: 3px;
-    transition: all 0.2s ease;
-    display: inline-block;
-    position: relative;
-    background: var(--color-white);
 }
 
 .category-btn:hover {
     border-color: var(--color-secondary);
-    background: #fafbfb;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.category-btn:hover::before {
-    border-color: var(--color-secondary);
+    background: rgba(92, 141, 58, 0.04);
 }
 
 .category-btn.active {
-    background: var(--color-white);
-    border-color: var(--color-secondary);
-    color: var(--color-primary);
-    font-weight: 500;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.category-btn.active::before {
     background: var(--color-secondary);
     border-color: var(--color-secondary);
-}
-
-.category-btn.active::after {
-    content: '✓';
-    position: absolute;
     color: var(--color-white);
-    font-size: 11px;
-    font-weight: 700;
-    margin-left: -12px;
-    margin-top: 1px;
+    font-weight: 500;
 }
 
 /* Footer */
@@ -588,16 +551,6 @@ section {
         font-size: 0.85rem;
         padding: 9px 16px;
     }
-
-    .category-btn::before {
-        width: 13px;
-        height: 13px;
-    }
-
-    .category-btn.active::after {
-        font-size: 10px;
-        margin-left: -11px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -643,18 +596,7 @@ section {
 
     .category-btn {
         font-size: 0.8rem;
-        padding: 8px 12px;
-        gap: 6px;
-    }
-
-    .category-btn::before {
-        width: 12px;
-        height: 12px;
-    }
-
-    .category-btn.active::after {
-        font-size: 10px;
-        margin-left: -11px;
+        padding: 8px 14px;
     }
 
     .food-item {
