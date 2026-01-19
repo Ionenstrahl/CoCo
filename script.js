@@ -33,7 +33,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1260;
+    const tokens = 1268;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -117,7 +117,7 @@ function createFoodItem(food, maxCO2, maxCO2AllCategories) {
 
     const co2Value = document.createElement('div');
     co2Value.className = 'food-co2-value';
-    co2Value.textContent = `${food.co2Value.toFixed(3)} kg CO2`;
+    co2Value.textContent = `${food.co2Value.toFixed(1)} kg CO2`;
     co2Value.addEventListener('click', () => showSourceModal(food));
 
     foodDetails.appendChild(foodName);
@@ -187,7 +187,7 @@ function calculateCO2(food, mode) {
 
     switch (mode) {
         case 'weight':
-            return co2PerKg / 10;
+            return co2PerKg;
 
         case 'calories':
             const kgFor100kcal = 100 / caloriesPer100g;
@@ -199,7 +199,7 @@ function calculateCO2(food, mode) {
             return co2PerKg * kgFor10gProtein;
 
         default:
-            return co2PerKg / 10;
+            return co2PerKg;
     }
 }
 
