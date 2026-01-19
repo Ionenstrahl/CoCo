@@ -182,10 +182,14 @@ section {
     box-shadow: 0 2px 4px var(--color-shadow);
 }
 
-section h2 {
+.section-heading {
     color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-    font-size: 1.8rem;
+    margin: 0 0 var(--spacing-xl) 0;
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
 }
 
 /* Food Comparison Section */
@@ -307,16 +311,17 @@ section h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
 }
 
 .controls-label {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 500;
     color: var(--color-text);
     text-align: center;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
+    opacity: 0.85;
 }
 
 /* Mode Selection Buttons - Radio Style */
@@ -325,37 +330,39 @@ section h2 {
     gap: 0;
     justify-content: center;
     flex-wrap: wrap;
-    background: var(--color-background);
-    padding: 4px;
-    border-radius: 10px;
+    background: #f8f9fa;
+    padding: 3px;
+    border-radius: 6px;
     width: fit-content;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e3e6e9;
 }
 
 .mode-btn {
-    padding: 10px 24px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    padding: 12px 28px;
+    font-size: 0.9rem;
+    font-weight: 400;
     border: none;
     background: transparent;
-    color: var(--color-text);
+    color: #5a6570;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     position: relative;
-    border-radius: 8px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    white-space: nowrap;
 }
 
 .mode-btn::before {
     content: '';
-    width: 14px;
-    height: 14px;
-    border: 2px solid var(--color-border);
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #c0c5ca;
     border-radius: 50%;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     display: inline-block;
+    background: var(--color-white);
 }
 
 .mode-btn:hover {
@@ -369,57 +376,58 @@ section h2 {
 .mode-btn.active {
     background: var(--color-white);
     color: var(--color-primary);
-    font-weight: 600;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .mode-btn.active::before {
     border-color: var(--color-secondary);
-    background: var(--color-secondary);
-    box-shadow: inset 0 0 0 3px var(--color-white);
+    background: var(--color-white);
+    box-shadow: inset 0 0 0 3px var(--color-secondary);
 }
 
 /* Category Filter Buttons - Checkbox Style */
 .category-buttons {
     display: flex;
-    gap: var(--spacing-sm);
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 0;
 }
 
 .category-btn {
-    padding: 8px 18px;
+    padding: 10px 20px;
     font-size: 0.9rem;
-    font-weight: 500;
-    border: 2px solid var(--color-border);
+    font-weight: 400;
+    border: 1px solid #d4d8dc;
     background: var(--color-white);
-    color: var(--color-text);
-    border-radius: 8px;
+    color: #5a6570;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    gap: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    white-space: nowrap;
 }
 
 .category-btn::before {
     content: '';
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--color-border);
-    border-radius: 4px;
-    transition: all 0.25s ease;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #c0c5ca;
+    border-radius: 3px;
+    transition: all 0.2s ease;
     display: inline-block;
     position: relative;
+    background: var(--color-white);
 }
 
 .category-btn:hover {
     border-color: var(--color-secondary);
-    background: rgba(92, 141, 58, 0.03);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    background: #fafbfb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .category-btn:hover::before {
@@ -430,7 +438,8 @@ section h2 {
     background: var(--color-white);
     border-color: var(--color-secondary);
     color: var(--color-primary);
-    font-weight: 600;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .category-btn.active::before {
@@ -442,9 +451,9 @@ section h2 {
     content: '✓';
     position: absolute;
     color: var(--color-white);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    margin-left: -14px;
+    margin-left: -12px;
     margin-top: 1px;
 }
 
@@ -564,8 +573,17 @@ section h2 {
         font-size: 1.25rem;
     }
 
+    .section-heading {
+        font-size: 1.85rem;
+    }
+
     .controls-label {
-        font-size: 0.85rem;
+        font-size: 0.875rem;
+    }
+
+    .controls-group {
+        gap: 12px;
+        margin-bottom: var(--spacing-lg);
     }
 
     .food-image {
@@ -579,22 +597,27 @@ section h2 {
 
     .mode-btn {
         font-size: 0.85rem;
-        padding: 8px 16px;
+        padding: 10px 20px;
     }
 
     .mode-btn::before {
-        width: 12px;
-        height: 12px;
+        width: 11px;
+        height: 11px;
     }
 
     .category-btn {
         font-size: 0.85rem;
-        padding: 7px 14px;
+        padding: 9px 16px;
     }
 
     .category-btn::before {
-        width: 14px;
-        height: 14px;
+        width: 13px;
+        height: 13px;
+    }
+
+    .category-btn.active::after {
+        font-size: 10px;
+        margin-left: -11px;
     }
 }
 
@@ -608,13 +631,18 @@ section h2 {
         font-size: 2rem;
     }
 
+    .section-heading {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-lg);
+    }
+
     .controls-group {
-        gap: var(--spacing-xs);
-        margin-bottom: var(--spacing-sm);
+        gap: 10px;
+        margin-bottom: var(--spacing-md);
     }
 
     .controls-label {
-        font-size: 0.8rem;
+        font-size: 0.825rem;
     }
 
     .mode-buttons {
@@ -622,30 +650,39 @@ section h2 {
     }
 
     .mode-btn {
-        font-size: 0.8rem;
-        padding: 7px 12px;
-        gap: 4px;
-    }
-
-    .mode-btn::before {
-        width: 11px;
-        height: 11px;
-    }
-
-    .category-btn {
-        font-size: 0.8rem;
-        padding: 6px 12px;
+        font-size: 0.825rem;
+        padding: 9px 16px;
         gap: 6px;
     }
 
+    .mode-btn::before {
+        width: 10px;
+        height: 10px;
+        border-width: 1.5px;
+    }
+
+    .mode-btn.active::before {
+        box-shadow: inset 0 0 0 2.5px var(--color-secondary);
+    }
+
+    .category-buttons {
+        gap: 8px;
+    }
+
+    .category-btn {
+        font-size: 0.825rem;
+        padding: 8px 14px;
+        gap: 8px;
+    }
+
     .category-btn::before {
-        width: 13px;
-        height: 13px;
+        width: 12px;
+        height: 12px;
     }
 
     .category-btn.active::after {
-        font-size: 11px;
-        margin-left: -12px;
+        font-size: 10px;
+        margin-left: -11px;
     }
 
     .food-item {
