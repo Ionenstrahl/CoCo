@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .test.pass {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .test.fail {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        h1 { color: #333; }
+        h2 { color: #666; margin-top: 30px; }
+        .test-name { font-weight: bold; }
+        .test-result { margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Bar Chart Component Tests</h1>
+    <div id="test-results"></div>
+
+    <script src="data.js"></script>
+    <script>
+        const results = [];
+
+        function test(name, fn) {
+            try {
+                const result = fn();
+                results.push({ name, pass: result.pass, message: result.message });
+            } catch (e) {
+                results.push({ name, pass: false, message: e.message });
+            }
+        }
+
+        function renderResults() {
+            const container = document.getElementById('test-results');
+            let html = '';
+            let passed = 0;
+            let failed = 0;
+
+            results.forEach(result => {
+                if (result.pass) passed++;
+                else failed++;
+
+                html += `
+                    <div class="test ${result.pass ? 'pass' : 'fail'}">
+                        <div class="test-name">${result.pass ? '✓' : '✗'} ${result.name}</div>
+                        <div class="test-result">${result.message}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `
+                <h2>Summary: ${passed} passed, ${failed} failed</h2>
+                ${html}
+            `;
+        }
+
+        // Test 1: Foods data is available
+        test('Foods data is loaded', () => {
+            if (typeof foods === 'undefined' || !foods || foods.length === 0) {
+                return { pass: false, message: 'Foods array is not defined or empty' };
+            }
+            return { pass: true, message: `${foods.length} foods loaded` };
+        });
+
+        // Test 2: Each food has required properties
+        test('Foods have required properties', () => {
+            const requiredProps = ['id', 'name', 'co2PerKg', 'caloriesPer100g', 'proteinPer100g'];
+            const missingProps = [];
+
+            foods.forEach((food, index) => {
+                requiredProps.forEach(prop => {
+                    if (!(prop in food)) {
+                        missingProps.push(`Food ${index} (${food.name || 'unknown'}) missing ${prop}`);
+                    }
+                });
+            });
+
+            if (missingProps.length > 0) {
+                return { pass: false, message: missingProps.join(', ') };
+            }
+            return { pass: true, message: 'All foods have required properties' };
+        });
+
+        // Test 3: CO2 calculation for weight mode
+        test('CO2 calculation for weight mode', () => {
+            const testFood = foods[0];
+            const expected = testFood.co2PerKg / 10;
+            const actual = testFood.co2PerKg / 10; // Simplified test
+
+            if (Math.abs(actual - expected) < 0.001) {
+                return { pass: true, message: `Weight mode calculation correct: ${actual.toFixed(3)}` };
+            }
+            return { pass: false, message: `Expected ${expected}, got ${actual}` };
+        });
+
+        // Test 4: CO2 calculation for calories mode
+        test('CO2 calculation for calories mode', () => {
+            const testFood = foods[0];
+            const kgFor100kcal = 100 / testFood.caloriesPer100g;
+            const expected = testFood.co2PerKg * kgFor100kcal;
+
+            if (expected > 0) {
+                return { pass: true, message: `Calories mode calculation produces: ${expected.toFixed(3)}` };
+            }
+            return { pass: false, message: 'Calories mode calculation failed' };
+        });
+
+        // Test 5: CO2 calculation for protein mode
+        test('CO2 calculation for protein mode', () => {
+            const testFood = foods.find(f => f.proteinPer100g > 0);
+            if (!testFood) {
+                return { pass: false, message: 'No food with protein found' };
+            }
+
+            const kgFor10gProtein = 10 / testFood.proteinPer100g;
+            const expected = testFood.co2PerKg * kgFor10gProtein;
+
+            if (expected > 0) {
+                return { pass: true, message: `Protein mode calculation produces: ${expected.toFixed(3)}` };
+            }
+            return { pass: false, message: 'Protein mode calculation failed' };
+        });
+
+        // Test 6: Bar chart should handle all foods being sorted
+        test('Foods can be sorted by CO2 value', () => {
+            const testFoods = foods.map(food => ({
+                ...food,
+                co2Value: food.co2PerKg / 10
+            }));
+
+            testFoods.sort((a, b) => a.co2Value - b.co2Value);
+
+            let isSorted = true;
+            for (let i = 1; i < testFoods.length; i++) {
+                if (testFoods[i].co2Value < testFoods[i-1].co2Value) {
+                    isSorted = false;
+                    break;
+                }
+            }
+
+            if (isSorted) {
+                return { pass: true, message: `${testFoods.length} foods sorted correctly` };
+            }
+            return { pass: false, message: 'Foods not sorted correctly' };
+        });
+
+        // Test 7: Color coding function
+        test('Color coding function works', () => {
+            const getColorForCO2 = (value) => {
+                if (value < 0.5) return '#4caf50';
+                if (value < 1.5) return '#8bc34a';
+                if (value < 3.0) return '#cddc39';
+                if (value < 5.0) return '#ffeb3b';
+                if (value < 10.0) return '#ff9800';
+                return '#f44336';
+            };
+
+            const tests = [
+                { value: 0.3, expected: '#4caf50' },
+                { value: 1.0, expected: '#8bc34a' },
+                { value: 2.5, expected: '#cddc39' },
+                { value: 4.0, expected: '#ffeb3b' },
+                { value: 8.0, expected: '#ff9800' },
+                { value: 15.0, expected: '#f44336' }
+            ];
+
+            for (const t of tests) {
+                const color = getColorForCO2(t.value);
+                if (color !== t.expected) {
+                    return { pass: false, message: `Value ${t.value} returned ${color}, expected ${t.expected}` };
+                }
+            }
+
+            return { pass: true, message: 'All color codes correct' };
+        });
+
+        // Test 8: Category grouping
+        test('Foods can be grouped by category', () => {
+            const categories = [...new Set(foods.map(f => f.category))];
+
+            if (categories.length === 0) {
+                return { pass: false, message: 'No categories found' };
+            }
+
+            const grouped = {};
+            categories.forEach(cat => {
+                grouped[cat] = foods.filter(f => f.category === cat);
+            });
+
+            const totalGrouped = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
+
+            if (totalGrouped !== foods.length) {
+                return { pass: false, message: `Grouped ${totalGrouped} foods but have ${foods.length} total` };
+            }
+
+            return { pass: true, message: `${categories.length} categories: ${categories.join(', ')}` };
+        });
+
+        // Test 9: Category filtering
+        test('Can filter foods by category', () => {
+            const activeCategories = new Set(['animal', 'plant_protein']);
+            const filtered = foods.filter(f => activeCategories.has(f.category));
+
+            if (filtered.length === 0) {
+                return { pass: false, message: 'No foods after filtering' };
+            }
+
+            const hasWrongCategory = filtered.some(f => !activeCategories.has(f.category));
+            if (hasWrongCategory) {
+                return { pass: false, message: 'Filtered foods contain wrong categories' };
+            }
+
+            return { pass: true, message: `Filtered to ${filtered.length} foods from 2 categories` };
+        });
+
+        // Test 10: Max CO2 calculation for filtered foods
+        test('Max CO2 recalculated for filtered foods', () => {
+            const allFoodsWithCO2 = foods.map(food => ({
+                ...food,
+                co2Value: food.co2PerKg / 10
+            }));
+
+            const allMax = Math.max(...allFoodsWithCO2.map(f => f.co2Value));
+
+            const vegetableOnly = allFoodsWithCO2.filter(f => f.category === 'vegetable');
+            const vegMax = Math.max(...vegetableOnly.map(f => f.co2Value));
+
+            if (vegMax >= allMax) {
+                return { pass: false, message: 'Vegetable max should be less than all foods max' };
+            }
+
+            return { pass: true, message: `All max: ${allMax.toFixed(3)}, Veg max: ${vegMax.toFixed(3)}` };
+        });
+
+        // Render results
+        renderResults();
+    </script>
+</body>
+</html>

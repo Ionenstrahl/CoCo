@@ -2,6 +2,14 @@
 // ABOUTME: Displays all foods sorted by CO2 footprint as horizontal bars
 
 let comparisonMode = 'weight';
+let activeCategories = new Set(['animal', 'plant_protein', 'grain', 'vegetable']);
+
+const categoryNames = {
+    animal: 'Animal Products',
+    plant_protein: 'Plant Proteins',
+    grain: 'Grains',
+    vegetable: 'Vegetables'
+};
 
 
 const foodEmojis = {
@@ -25,7 +33,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1071;
+    const tokens = 1136;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
@@ -49,21 +57,50 @@ function renderAllFoods() {
         return;
     }
 
-    const foodsWithCO2 = foods.map(food => ({
-        ...food,
-        co2Value: calculateCO2(food, comparisonMode)
-    })).filter(food => food.co2Value !== null);
+    const foodsWithCO2 = foods
+        .map(food => ({
+            ...food,
+            co2Value: calculateCO2(food, comparisonMode)
+        }))
+        .filter(food => food.co2Value !== null && activeCategories.has(food.category));
 
-    foodsWithCO2.sort((a, b) => a.co2Value - b.co2Value);
+    if (foodsWithCO2.length === 0) {
+        const container = document.getElementById('foodsList');
+        container.innerHTML = '<div class="no-foods-message">No foods selected. Please select at least one category.</div>';
+        return;
+    }
 
     const maxCO2 = Math.max(...foodsWithCO2.map(f => f.co2Value));
+
+    const groupedByCategory = {};
+    foodsWithCO2.forEach(food => {
+        if (!groupedByCategory[food.category]) {
+            groupedByCategory[food.category] = [];
+        }
+        groupedByCategory[food.category].push(food);
+    });
+
+    Object.values(groupedByCategory).forEach(group => {
+        group.sort((a, b) => a.co2Value - b.co2Value);
+    });
+
+    const categoryOrder = ['vegetable', 'grain', 'plant_protein', 'animal'];
 
     const container = document.getElementById('foodsList');
     container.innerHTML = '';
 
-    foodsWithCO2.forEach((food) => {
-        const foodItem = createFoodItem(food, maxCO2);
-        container.appendChild(foodItem);
+    categoryOrder.forEach(category => {
+        if (!groupedByCategory[category]) return;
+
+        const categoryHeader = document.createElement('div');
+        categoryHeader.className = 'category-header';
+        categoryHeader.textContent = categoryNames[category];
+        container.appendChild(categoryHeader);
+
+        groupedByCategory[category].forEach((food) => {
+            const foodItem = createFoodItem(food, maxCO2);
+            container.appendChild(foodItem);
+        });
     });
 }
 
@@ -116,6 +153,10 @@ function setupEventListeners() {
         btn.addEventListener('click', handleModeChange);
     });
 
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', handleCategoryToggle);
+    });
+
     document.getElementById('viewSourcesLink').addEventListener('click', (e) => {
         e.preventDefault();
         showAllSourcesModal();
@@ -139,6 +180,20 @@ function handleModeChange(e) {
 
     e.target.classList.add('active');
     comparisonMode = e.target.dataset.mode;
+
+    renderAllFoods();
+}
+
+function handleCategoryToggle(e) {
+    const category = e.target.dataset.category;
+
+    if (activeCategories.has(category)) {
+        activeCategories.delete(category);
+        e.target.classList.remove('active');
+    } else {
+        activeCategories.add(category);
+        e.target.classList.add('active');
+    }
 
     renderAllFoods();
 }
