@@ -2,19 +2,19 @@
    ABOUTME: Includes color-coding for CO2 levels and accessible contrast ratios */
 
 :root {
-    --color-primary: #2d5016;
-    --color-secondary: #5c8d3a;
-    --color-accent: #a4c639;
-    --color-background: #f5f8f1;
+    --color-primary: #5a7055;
+    --color-secondary: #7a9b76;
+    --color-accent: #a8c5a4;
+    --color-background: #f4f5f0;
     --color-white: #ffffff;
-    --color-text: #2c3e50;
-    --color-text-light: #7f8c8d;
-    --color-border: #d1d8d0;
-    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-text: #3d4842;
+    --color-text-light: #6b7670;
+    --color-border: #d4d9d1;
+    --color-shadow: rgba(61, 72, 66, 0.12);
 
-    --color-co2-low: #4caf50;
-    --color-co2-medium: #ff9800;
-    --color-co2-high: #f44336;
+    --color-co2-low: #7a9b76;
+    --color-co2-medium: #d4a574;
+    --color-co2-high: #c27b6c;
 
     --border-radius: 12px;
     --spacing-xs: 8px;
@@ -178,7 +178,7 @@ body {
 
 section {
     background: var(--color-white);
-    padding: var(--spacing-lg);h
+    padding: var(--spacing-lg);
     border-radius: 0;
     box-shadow: 0 2px 4px var(--color-shadow);
 }
@@ -236,7 +236,7 @@ section {
 }
 
 .food-item:hover {
-    background-color: rgba(92, 141, 58, 0.1);
+    background-color: rgba(122, 155, 118, 0.08);
     border-color: var(--color-secondary);
     box-shadow: 0 4px 8px var(--color-shadow);
 }
@@ -389,7 +389,7 @@ section {
 
 .category-btn:hover {
     border-color: var(--color-secondary);
-    background: rgba(92, 141, 58, 0.04);
+    background: rgba(122, 155, 118, 0.06);
 }
 
 .category-btn.active {
@@ -625,47 +625,48 @@ section {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-background: #1a1d21;
-        --color-white: #2a2e33;
-        --color-text: #e4e6e8;
-        --color-text-light: #9ca3ab;
-        --color-border: #404449;
+        --color-primary: #7a9b76;
+        --color-secondary: #92b88e;
+        --color-accent: #a8c5a4;
+        --color-background: #1c1f1b;
+        --color-white: #2a2d28;
+        --color-text: #e4e6e3;
+        --color-text-light: #9ca39a;
+        --color-border: #3d4842;
         --color-shadow: rgba(0, 0, 0, 0.4);
     }
 
     body {
-        background-color: #13161a;
+        background-color: #15170f;
     }
 
-
-
     .header {
-        background: rgba(26, 29, 33, 0.);
+        background: rgba(28, 31, 27, 0.95);
     }
 
     .mode-buttons {
-        background: #1a1d21;
-        border-color: #404449;
+        background: #1c1f1b;
+        border-color: #3d4842;
     }
 
     .mode-btn {
-        color: #b0b5bb;
+        color: #adb3aa;
     }
 
     .mode-btn.active {
-        background: #2a2e33;
-        color: #e4e6e8;
+        background: #2a2d28;
+        color: #e4e6e3;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
     .category-btn {
-        background: #2a2e33;
-        border-color: #404449;
-        color: #b0b5bb;
+        background: #2a2d28;
+        border-color: #3d4842;
+        color: #adb3aa;
     }
 
     .category-btn:hover {
-        background: rgba(92, 141, 58, 0.15);
+        background: rgba(122, 155, 118, 0.2);
     }
 
     .category-btn.active {
@@ -674,12 +675,12 @@ section {
     }
 
     .food-item {
-        background: #2a2e33;
+        background: #2a2d28;
         border-color: transparent;
     }
 
     .food-item:hover {
-        background-color: #32373d;
+        background-color: #33362f;
         border-color: var(--color-secondary);
     }
 
@@ -692,7 +693,7 @@ section {
     }
 
     .food-image {
-        background: #1a1d21;
+        background: #1c1f1b;
     }
 
     .modal {
@@ -700,20 +701,20 @@ section {
     }
 
     .modal-content {
-        background-color: #2a2e33;
+        background-color: #2a2d28;
     }
 
     .modal-close {
-        color: #9ca3ab;
+        color: #9ca39a;
     }
 
     .modal-close:hover {
-        color: #e4e6e8;
+        color: #e4e6e3;
     }
 
     .source-item {
-        border-color: #404449;
-        background: #1a1d21;
+        border-color: #3d4842;
+        background: #1c1f1b;
     }
 }
 
