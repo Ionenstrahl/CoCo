@@ -331,7 +331,7 @@ const foods = [
   },
   {
     id: 'walnuts',
-    name: 'Walnuts (in Shell)',
+    name: 'Walnuts',
     category: 'plant_protein',
     co2PerKg: 0.9,
     caloriesPer100g: 654,
@@ -429,7 +429,7 @@ const foods = [
   },
   {
     id: 'wheat_bread',
-    name: 'Mixed Bread',
+    name: 'Bread',
     category: 'grain',
     co2PerKg: 0.6,
     caloriesPer100g: 265,
@@ -463,16 +463,16 @@ const foods = [
     id: 'oats',
     name: 'Oats',
     category: 'grain',
-    co2PerKg: 2.5,
+    co2PerKg: 0.6,
     caloriesPer100g: 389,
     proteinPer100g: 17,
     fatPer100g: 6.9,
     source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
+      title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
+      authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
+      journal: 'ifeu - Institut für Energie- und Umweltforschung Heidelberg',
+      year: 2020,
+      url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
     }
   },
 
@@ -655,28 +655,12 @@ const foods = [
   },
   {
     id: 'peas_fresh',
-    name: 'Peas (Fresh, in Pods)',
+    name: 'Peas',
     category: 'vegetable',
     co2PerKg: 0.4,
     caloriesPer100g: 81,
     proteinPer100g: 5,
     fatPer100g: 0.4,
-    source: {
-      title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
-      authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
-      journal: 'ifeu - Institut für Energie- und Umweltforschung Heidelberg',
-      year: 2020,
-      url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
-    }
-  },
-  {
-    id: 'olive_oil',
-    name: 'Olive Oil',
-    category: 'vegetable',
-    co2PerKg: 3.2,
-    caloriesPer100g: 884,
-    proteinPer100g: 0,
-    fatPer100g: 100,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',

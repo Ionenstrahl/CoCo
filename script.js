@@ -24,7 +24,7 @@ const foodEmojis = {
     potatoes: '🥔', broccoli: '🥦', carrots: '🥕',
     apples: '🍎', bananas: '🍌', bell_peppers: '🫑', mushrooms: '🍄',
     cucumber: '🥒', zucchini: '🥒', eggplant: '🍆',
-    pear: '🍐', peas_fresh: '🫛', olive_oil: '🫒',
+    pear: '🍐', peas_fresh: '🫛',
     tomatoes_fresh_avg: '🍅', tomatoes_de_seasonal: '🍅', tomatoes_south_europe: '🍅',
     tomatoes_organic: '🍅', tomatoes_de_greenhouse_winter: '🍅',
     tomatoes_passata_carton: '🧃', tomatoes_passata_can: '🥫', tomatoes_passata_jar: '🫙',
