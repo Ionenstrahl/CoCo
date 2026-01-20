@@ -613,7 +613,8 @@ section {
 }
 
 /* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
+@media (
+    prefers-color-scheme: dark) {
     :root {
         --color-primary: #7a9b76;
         --color-secondary: #92b88e;
@@ -632,7 +633,7 @@ section {
     }
 
     .header {
-        background: rgba(28, 31, 27, 0.95);
+        background: rgba(28, 31, 27, 0.5);
     }
 
     .mode-buttons {
