@@ -238,7 +238,6 @@ function showSourceModal(food) {
             <ul style="margin-left: 20px;">
                 <li>Calories: ${food.caloriesPer100g} kcal</li>
                 <li>Protein: ${food.proteinPer100g}g</li>
-                <li>Fat: ${food.fatPer100g}g</li>
             </ul>
         </div>
     `;

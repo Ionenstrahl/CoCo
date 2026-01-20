@@ -8,9 +8,8 @@ const foods = [
     name: 'Beef',
     category: 'animal',
     co2PerKg: 13.6,
-    caloriesPer100g: 250,
-    proteinPer100g: 26,
-    fatPer100g: 15,
+    caloriesPer100g: 140,
+    proteinPer100g: 23,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -24,9 +23,8 @@ const foods = [
     name: 'Beef (Organic)',
     category: 'animal',
     co2PerKg: 21.7,
-    caloriesPer100g: 250,
-    proteinPer100g: 26,
-    fatPer100g: 15,
+    caloriesPer100g: 140,
+    proteinPer100g: 23,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -41,8 +39,7 @@ const foods = [
     category: 'animal',
     co2PerKg: 9.0,
     caloriesPer100g: 250,
-    proteinPer100g: 20,
-    fatPer100g: 20,
+    proteinPer100g: 18,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -58,7 +55,6 @@ const foods = [
     co2PerKg: 5.5,
     caloriesPer100g: 165,
     proteinPer100g: 31,
-    fatPer100g: 3.6,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -76,7 +72,6 @@ const foods = [
     co2PerKg: 5.1,
     caloriesPer100g: 206,
     proteinPer100g: 20,
-    fatPer100g: 13,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -94,7 +89,6 @@ const foods = [
     co2PerKg: 5.7,
     caloriesPer100g: 402,
     proteinPer100g: 25,
-    fatPer100g: 33,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -108,9 +102,8 @@ const foods = [
     name: 'Milk',
     category: 'animal',
     co2PerKg: 1.4,
-    caloriesPer100g: 61,
-    proteinPer100g: 3.2,
-    fatPer100g: 3.3,
+    caloriesPer100g: 65,
+    proteinPer100g: 3.4,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -124,9 +117,8 @@ const foods = [
     name: 'Eggs',
     category: 'animal',
     co2PerKg: 3.0,
-    caloriesPer100g: 155,
+    caloriesPer100g: 145,
     proteinPer100g: 13,
-    fatPer100g: 11,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -140,9 +132,8 @@ const foods = [
     name: 'Yogurt',
     category: 'animal',
     co2PerKg: 1.7,
-    caloriesPer100g: 59,
-    proteinPer100g: 10,
-    fatPer100g: 0.4,
+    caloriesPer100g: 70,
+    proteinPer100g: 3.7,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -156,9 +147,8 @@ const foods = [
     name: 'Quark (40% Fat)',
     category: 'animal',
     co2PerKg: 3.3,
-    caloriesPer100g: 159,
+    caloriesPer100g: 99,
     proteinPer100g: 11,
-    fatPer100g: 11,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -176,7 +166,6 @@ const foods = [
     co2PerKg: 1.7,
     caloriesPer100g: 116,
     proteinPer100g: 9,
-    fatPer100g: 0.4,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -190,9 +179,8 @@ const foods = [
     name: 'Chickpeas',
     category: 'plant_protein',
     co2PerKg: 1.3,
-    caloriesPer100g: 164,
+    caloriesPer100g: 137,
     proteinPer100g: 8.9,
-    fatPer100g: 2.6,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -208,7 +196,6 @@ const foods = [
     co2PerKg: 0.6,
     caloriesPer100g: 160,
     proteinPer100g: 2,
-    fatPer100g: 15,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -224,7 +211,6 @@ const foods = [
     co2PerKg: 0.9,
     caloriesPer100g: 654,
     proteinPer100g: 15,
-    fatPer100g: 65,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -240,7 +226,6 @@ const foods = [
     co2PerKg: 1.1,
     caloriesPer100g: 200,
     proteinPer100g: 16,
-    fatPer100g: 10,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -254,9 +239,8 @@ const foods = [
     name: 'Veggie Burger (Pea)',
     category: 'plant_protein',
     co2PerKg: 1.8,
-    caloriesPer100g: 200,
-    proteinPer100g: 18,
-    fatPer100g: 9,
+    caloriesPer100g: 191,
+    proteinPer100g: 14,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -271,8 +255,7 @@ const foods = [
     category: 'plant_protein',
     co2PerKg: 0.3,
     caloriesPer100g: 47,
-    proteinPer100g: 1.3,
-    fatPer100g: 1.5,
+    proteinPer100g: 0.8,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -286,9 +269,8 @@ const foods = [
     name: 'Soy Milk',
     category: 'plant_protein',
     co2PerKg: 0.4,
-    caloriesPer100g: 54,
-    proteinPer100g: 3.3,
-    fatPer100g: 1.8,
+    caloriesPer100g: 39,
+    proteinPer100g: 2.7,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -306,7 +288,6 @@ const foods = [
     co2PerKg: 3.1,
     caloriesPer100g: 130,
     proteinPer100g: 2.7,
-    fatPer100g: 0.3,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -320,9 +301,8 @@ const foods = [
     name: 'Bread',
     category: 'grain',
     co2PerKg: 0.6,
-    caloriesPer100g: 265,
-    proteinPer100g: 9,
-    fatPer100g: 3.2,
+    caloriesPer100g: 255,
+    proteinPer100g: 8,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -336,9 +316,8 @@ const foods = [
     name: 'Pasta',
     category: 'grain',
     co2PerKg: 0.7,
-    caloriesPer100g: 131,
+    caloriesPer100g: 151,
     proteinPer100g: 5,
-    fatPer100g: 0.9,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -352,9 +331,8 @@ const foods = [
     name: 'Oats',
     category: 'grain',
     co2PerKg: 0.6,
-    caloriesPer100g: 389,
-    proteinPer100g: 17,
-    fatPer100g: 6.9,
+    caloriesPer100g: 369,
+    proteinPer100g: 13,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -370,9 +348,8 @@ const foods = [
     name: 'Potatoes',
     category: 'vegetable',
     co2PerKg: 0.2,
-    caloriesPer100g: 77,
+    caloriesPer100g: 73,
     proteinPer100g: 2,
-    fatPer100g: 0.1,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -387,8 +364,7 @@ const foods = [
     category: 'vegetable',
     co2PerKg: 0.3,
     caloriesPer100g: 34,
-    proteinPer100g: 2.8,
-    fatPer100g: 0.4,
+    proteinPer100g: 3.7,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -402,9 +378,8 @@ const foods = [
     name: 'Carrots',
     category: 'vegetable',
     co2PerKg: 0.1,
-    caloriesPer100g: 41,
+    caloriesPer100g: 29,
     proteinPer100g: 0.9,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -420,7 +395,6 @@ const foods = [
     co2PerKg: 0.3,
     caloriesPer100g: 52,
     proteinPer100g: 0.3,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -436,7 +410,6 @@ const foods = [
     co2PerKg: 0.6,
     caloriesPer100g: 89,
     proteinPer100g: 1.1,
-    fatPer100g: 0.3,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -452,7 +425,6 @@ const foods = [
     co2PerKg: 0.6,
     caloriesPer100g: 31,
     proteinPer100g: 1,
-    fatPer100g: 0.3,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -468,7 +440,6 @@ const foods = [
     co2PerKg: 1.3,
     caloriesPer100g: 22,
     proteinPer100g: 3.1,
-    fatPer100g: 0.3,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -482,9 +453,8 @@ const foods = [
     name: 'Cucumber',
     category: 'vegetable',
     co2PerKg: 0.4,
-    caloriesPer100g: 15,
+    caloriesPer100g: 12,
     proteinPer100g: 0.7,
-    fatPer100g: 0.1,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -498,9 +468,8 @@ const foods = [
     name: 'Zucchini',
     category: 'vegetable',
     co2PerKg: 0.2,
-    caloriesPer100g: 17,
-    proteinPer100g: 1.2,
-    fatPer100g: 0.3,
+    caloriesPer100g: 19,
+    proteinPer100g: 1.6,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -516,7 +485,6 @@ const foods = [
     co2PerKg: 0.2,
     caloriesPer100g: 25,
     proteinPer100g: 1,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -532,7 +500,6 @@ const foods = [
     co2PerKg: 0.3,
     caloriesPer100g: 57,
     proteinPer100g: 0.4,
-    fatPer100g: 0.1,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -547,8 +514,7 @@ const foods = [
     category: 'vegetable',
     co2PerKg: 0.4,
     caloriesPer100g: 81,
-    proteinPer100g: 5,
-    fatPer100g: 0.4,
+    proteinPer100g: 6.1,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -566,7 +532,6 @@ const foods = [
     co2PerKg: 0.8,
     caloriesPer100g: 18,
     proteinPer100g: 0.9,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -582,7 +547,6 @@ const foods = [
     co2PerKg: 0.3,
     caloriesPer100g: 18,
     proteinPer100g: 0.9,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -598,7 +562,6 @@ const foods = [
     co2PerKg: 0.4,
     caloriesPer100g: 18,
     proteinPer100g: 0.9,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -614,7 +577,6 @@ const foods = [
     co2PerKg: 1.1,
     caloriesPer100g: 18,
     proteinPer100g: 0.9,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -630,7 +592,6 @@ const foods = [
     co2PerKg: 2.9,
     caloriesPer100g: 18,
     proteinPer100g: 0.9,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -646,7 +607,6 @@ const foods = [
     co2PerKg: 1.6,
     caloriesPer100g: 28,
     proteinPer100g: 1.3,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -662,7 +622,6 @@ const foods = [
     co2PerKg: 1.8,
     caloriesPer100g: 28,
     proteinPer100g: 1.3,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
@@ -678,7 +637,6 @@ const foods = [
     co2PerKg: 1.9,
     caloriesPer100g: 28,
     proteinPer100g: 1.3,
-    fatPer100g: 0.2,
     source: {
       title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
       authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
