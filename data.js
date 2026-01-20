@@ -37,7 +37,7 @@ const foods = [
   },
   {
     id: 'beef_patty_frozen',
-    name: 'Beef Patty (Frozen)',
+    name: 'Beef Patty',
     category: 'animal',
     co2PerKg: 9.0,
     caloriesPer100g: 250,
@@ -49,22 +49,6 @@ const foods = [
       journal: 'ifeu - Institut für Energie- und Umweltforschung Heidelberg',
       year: 2020,
       url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
-    }
-  },
-  {
-    id: 'pork',
-    name: 'Pork',
-    category: 'animal',
-    co2PerKg: 12.1,
-    caloriesPer100g: 242,
-    proteinPer100g: 27,
-    fatPer100g: 14,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
     }
   },
   {
@@ -87,7 +71,7 @@ const foods = [
   // Animal Products - Fish
   {
     id: 'salmon_farmed',
-    name: 'Fish (Aquaculture)',
+    name: 'Fish',
     category: 'animal',
     co2PerKg: 5.1,
     caloriesPer100g: 206,
@@ -99,38 +83,6 @@ const foods = [
       journal: 'ifeu - Institut für Energie- und Umweltforschung Heidelberg',
       year: 2020,
       url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
-    }
-  },
-  {
-    id: 'tuna',
-    name: 'Tuna',
-    category: 'animal',
-    co2PerKg: 6.1,
-    caloriesPer100g: 132,
-    proteinPer100g: 28,
-    fatPer100g: 0.95,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
-    }
-  },
-  {
-    id: 'whitefish',
-    name: 'White Fish',
-    category: 'animal',
-    co2PerKg: 5.1,
-    caloriesPer100g: 105,
-    proteinPer100g: 22,
-    fatPer100g: 1.7,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
     }
   },
 
@@ -218,26 +170,10 @@ const foods = [
 
   // Plant-Based Proteins
   {
-    id: 'tofu',
-    name: 'Tofu',
-    category: 'plant_protein',
-    co2PerKg: 2.0,
-    caloriesPer100g: 76,
-    proteinPer100g: 8,
-    fatPer100g: 4.8,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
-    }
-  },
-  {
     id: 'lentils',
-    name: 'Lentils (Dried)',
+    name: 'Lentils',
     category: 'plant_protein',
-    co2PerKg: 1.2,
+    co2PerKg: 1.7,
     caloriesPer100g: 116,
     proteinPer100g: 9,
     fatPer100g: 0.4,
@@ -251,7 +187,7 @@ const foods = [
   },
   {
     id: 'chickpeas',
-    name: 'Chickpeas (Canned)',
+    name: 'Chickpeas',
     category: 'plant_protein',
     co2PerKg: 1.3,
     caloriesPer100g: 164,
@@ -263,54 +199,6 @@ const foods = [
       journal: 'ifeu - Institut für Energie- und Umweltforschung Heidelberg',
       year: 2020,
       url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
-    }
-  },
-  {
-    id: 'black_beans',
-    name: 'Black Beans',
-    category: 'plant_protein',
-    co2PerKg: 1.0,
-    caloriesPer100g: 132,
-    proteinPer100g: 8.9,
-    fatPer100g: 0.5,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
-    }
-  },
-  {
-    id: 'peanuts',
-    name: 'Peanuts',
-    category: 'plant_protein',
-    co2PerKg: 2.5,
-    caloriesPer100g: 567,
-    proteinPer100g: 26,
-    fatPer100g: 49,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
-    }
-  },
-  {
-    id: 'almonds',
-    name: 'Almonds',
-    category: 'plant_protein',
-    co2PerKg: 2.3,
-    caloriesPer100g: 579,
-    proteinPer100g: 21,
-    fatPer100g: 50,
-    source: {
-      title: 'Environmental impacts of food production',
-      authors: 'Poore, J., & Nemecek, T.',
-      journal: 'Science',
-      year: 2018,
-      url: 'https://doi.org/10.1126/science.aaq0216'
     }
   },
   {
@@ -799,20 +687,4 @@ const foods = [
       url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
     }
   },
-  {
-    id: 'tomato_paste',
-    name: 'Tomato Paste',
-    category: 'tomatoes',
-    co2PerKg: 4.3,
-    caloriesPer100g: 82,
-    proteinPer100g: 4.3,
-    fatPer100g: 0.5,
-    source: {
-      title: 'Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland',
-      authors: 'Reinhardt, G., Gärtner, S., & Wagner, T.',
-      journal: 'ifeu - Institut für Energie- und Umweltforschung Heidelberg',
-      year: 2020,
-      url: 'https://www.ifeu.de/fileadmin/uploads/Reinhardt-Gaertner-Wagner-2020-Oekologische-Fu%C3%9Fabdruecke-von-Lebensmitteln-und-Gerichten-in-Deutschland-ifeu-2020.pdf'
-    }
-  }
 ];

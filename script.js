@@ -14,11 +14,11 @@ const categoryNames = {
 
 
 const foodEmojis = {
-    beef: '🥩', beef_organic: '🥩', beef_patty_frozen: '🍔', pork: '🐷', chicken: '🍗',
-    salmon_farmed: '🐟', tuna: '🐟', whitefish: '🐟',
+    beef: '🥩', beef_organic: '🥩', beef_patty_frozen: '🍔', chicken: '🍗',
+    salmon_farmed: '🐟',
     cheese: '🧀', milk: '🥛', eggs: '🥚', yogurt: '🥛', quark: '🥛',
-    tofu: '🧈', lentils: '🫘', chickpeas: '🫘', black_beans: '🫘',
-    peanuts: '🥜', almonds: '🌰', avocado: '🥑', walnuts: '🌰',
+    lentils: '🫘', chickpeas: '🫘',
+    avocado: '🥑', walnuts: '🌰',
     veggie_burger_soy: '🍔', veggie_burger_pea: '🍔', oat_milk: '🥛', soy_milk: '🥛',
     rice: '🍚', wheat_bread: '🍞', oats: '🌾', pasta: '🍝',
     potatoes: '🥔', broccoli: '🥦', carrots: '🥕',
@@ -27,8 +27,7 @@ const foodEmojis = {
     pear: '🍐', peas_fresh: '🫛',
     tomatoes_fresh_avg: '🍅', tomatoes_de_seasonal: '🍅', tomatoes_south_europe: '🍅',
     tomatoes_organic: '🍅', tomatoes_de_greenhouse_winter: '🍅',
-    tomatoes_passata_carton: '🧃', tomatoes_passata_can: '🥫', tomatoes_passata_jar: '🫙',
-    tomato_paste: '🧴'
+    tomatoes_passata_carton: '🧃', tomatoes_passata_can: '🥫', tomatoes_passata_jar: '🫙'
 };
 
 
