@@ -2,24 +2,33 @@
 // ABOUTME: Displays all foods sorted by CO2 footprint as horizontal bars
 
 let comparisonMode = 'weight';
-let activeCategories = new Set(['animal', 'plant_protein', 'grain', 'vegetable']);
+let activeCategories = new Set(['animal', 'plant_protein', 'grain', 'vegetable', 'tomatoes']);
 
 const categoryNames = {
     animal: 'Animal Products',
     plant_protein: 'Plant Proteins',
     grain: 'Grains',
-    vegetable: 'Vegetables'
+    vegetable: 'Vegetables',
+    tomatoes: 'Tomatoes'
 };
 
 
 const foodEmojis = {
-    beef: '🥩', lamb: '🐑', pork: '🐷', chicken: '🍗',
+    beef: '🥩', beef_organic: '🥩', beef_patty_frozen: '🍔', pork: '🐷', chicken: '🍗',
     salmon_farmed: '🐟', tuna: '🐟', whitefish: '🐟',
-    cheese: '🧀', milk: '🥛', eggs: '🥚', yogurt: '🥛',
+    cheese: '🧀', milk: '🥛', eggs: '🥚', yogurt: '🥛', quark: '🥛',
     tofu: '🧈', lentils: '🫘', chickpeas: '🫘', black_beans: '🫘',
-    peanuts: '🥜', almonds: '🌰', avocado: '🥑',
-    rice: '🍚', wheat_bread: '🍞', oats: '🌾',
-    potatoes: '🥔', tomatoes: '🍅', broccoli: '🥦', carrots: '🥕'
+    peanuts: '🥜', almonds: '🌰', avocado: '🥑', walnuts: '🌰',
+    veggie_burger_soy: '🍔', veggie_burger_pea: '🍔', oat_milk: '🥛', soy_milk: '🥛',
+    rice: '🍚', wheat_bread: '🍞', oats: '🌾', pasta: '🍝',
+    potatoes: '🥔', broccoli: '🥦', carrots: '🥕',
+    apples: '🍎', bananas: '🍌', bell_peppers: '🫑', mushrooms: '🍄',
+    cucumber: '🥒', zucchini: '🥒', eggplant: '🍆',
+    pear: '🍐', peas_fresh: '🫛', olive_oil: '🫒',
+    tomatoes_fresh_avg: '🍅', tomatoes_de_seasonal: '🍅', tomatoes_south_europe: '🍅',
+    tomatoes_organic: '🍅', tomatoes_de_greenhouse_winter: '🍅',
+    tomatoes_passata_carton: '🧃', tomatoes_passata_can: '🥫', tomatoes_passata_jar: '🫙',
+    tomato_paste: '🧴'
 };
 
 
@@ -33,7 +42,7 @@ function initializeApp() {
 }
 
 function calculateAttribution() {
-    const tokens = 1308;
+    const tokens = 52;
     const costPerToken = 0.015;
     const co2PerToken = 0.0045;
 
